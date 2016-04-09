@@ -1,4 +1,4 @@
-#include <math.h>
+#include <cmath>
 
 #include "hex.h"
 
@@ -68,9 +68,9 @@ cube pix2cube(pix p)
     ry = (int)floor(y+.5);
     rz = (int)floor(z+.5);
 
-    xer = abs(x-rx);
-    yer = abs(y-ry);
-    zer = abs(z-rz);
+    xer = std::abs(x-rx);
+    yer = std::abs(y-ry);
+    zer = std::abs(z-rz);
 
     if (xer > yer)
     {
@@ -168,9 +168,9 @@ cube cube_add(cube A, cube B)
 int distance(cube A, cube B)
 {
     A = cube_subtract(A,B);
-    A.x = abs(A.x);
-    A.y = abs(A.y);
-    A.z = abs(A.z);
+    A.x = std::abs(A.x);
+    A.y = std::abs(A.y);
+    A.z = std::abs(A.z);
 
     if (A.x > A.y)
     {
@@ -336,6 +336,6 @@ cube cube_rotate(cube A, cube origin, bool dir)
 
 cube neighbor(cube A, int h)
 {
-    h = abs(h);
+    h = std::abs(h);
     return cube_add(A,hex_dir[h]);
 }
