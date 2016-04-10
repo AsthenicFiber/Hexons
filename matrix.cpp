@@ -181,3 +181,17 @@ Matrix Matrix::operator ~ ()
     }
     return C;
 }
+
+void Matrix::print_matrix()
+{
+    std::cout << "\n" << m << " x " << n << std::endl;
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            std::cout << "\t" << get(i,j);
+        }
+        std::cout << std::endl;
+    }
+    return;
+}

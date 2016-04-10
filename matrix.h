@@ -19,6 +19,7 @@ public:
     mel operator *= (const mel &s);
     Matrix operator * (const Matrix &B);
     Matrix operator ~ ();
+    void print_matrix();
 
 private:
     int m,n;
