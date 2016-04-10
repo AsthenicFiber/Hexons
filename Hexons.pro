@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     hex.cpp \
     map.cpp \
     hexitem.cpp \
-    obstacle.cpp
+    obstacle.cpp \
+    matrix.cpp
 
 HEADERS += \
     controlwindow.h \
@@ -24,7 +25,8 @@ HEADERS += \
     hex.h \
     map.h \
     hexitem.h \
-    obstacle.h
+    obstacle.h \
+    matrix.h
 
 FORMS += \
     controlwindow.ui

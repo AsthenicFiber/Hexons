@@ -26,7 +26,7 @@ struct cube
     {
         return (x == h.x && y == h.y);
     }
-    void operator ++ (int)
+    void operator ~ ()
     {
         z = -x-y;
         return;
