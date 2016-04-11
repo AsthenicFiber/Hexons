@@ -4,10 +4,11 @@
 Matrix::Matrix(int rows, int cols)
   : m(rows),
     n(cols),
-    p(rows*cols)
+    p(new mel[rows*cols])
+  //p(rows*cols)
 {
-//     m = rows;
-//     n = cols;
+    //m = rows;
+    //n = cols;
 
     if (m < 0 || n < 0)
     {
@@ -22,19 +23,34 @@ Matrix::Matrix(int rows, int cols)
         n = 1;
     }
 
-//     p = new mel[m*n];
-//     for (int i = 0; i < m; i++)
-//     {
-//         for (int j = 0; j < n; j++)
-//         {
-//             p[i*n+j] = 0;
-//         }
-//     }
+     //p = new mel[m*n];
+     for (int i = 0; i < m; i++)
+     {
+         for (int j = 0; j < n; j++)
+         {
+             p[i*n+j] = 0;
+         }
+     }
+}
+
+
+Matrix::Matrix(Matrix&& other) : m(1), n(1), p(nullptr)
+{
+    m = other.m;
+    n = other.n;
+    p = other.p;
+
+    other.m = 1;
+    other.n = 1;
+    other.p = nullptr;
 }
 
 Matrix::~Matrix()
 {
-//     delete [] p;
+    if (p != nullptr)
+    {
+        delete [] p;
+    }
     std::cout << "shutting down\n";
 }
 
@@ -55,30 +71,30 @@ void Matrix::set(int row, int col, mel val)
 }
 */
 
-// void Matrix::operator = (const Matrix &B)
-// {
-// 
-//     if (m != B.m || n != B.n)
-//     {
-//         std::cout << "Matrices dimensions do not match for = operation." << std::endl;
-//         throw std::exception();
-//     }
-// 
-//     m = B.m;
-//     n = B.n;
-// 
-//     //p = new mel[m*n];
-// 
-//     for (int i = 0; i < m; i++)
-//     {
-//         for (int j = 0; j < n; j++)
-//         {
-//             get(i,j) = B.get(i,j);
-//             //set(i,j,B.get(i,j));
-//         }
-//     }
-//     return;
-// }
+void Matrix::operator = (const Matrix &B)
+{
+
+    if (m != B.m || n != B.n)
+    {
+        std::cout << "Matrices dimensions do not match for = operation." << std::endl;
+        throw std::exception();
+    }
+
+    m = B.m;
+    n = B.n;
+
+    //p = new mel[m*n];
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            get(i,j) = B.get(i,j);
+            //set(i,j,B.get(i,j));
+        }
+    }
+    return;
+}
 
 Matrix Matrix::operator + (const Matrix &B)
 {
@@ -174,29 +190,29 @@ Matrix Matrix::operator * (const Matrix &B)
     return C;
 }
 
-// Matrix Matrix::operator ~ ()
-// {
-//     // Transpose Operator
-//     Matrix C(n,m);
-// 
-//     for (int i = 0; i < m; i++)
-//     {
-//         for (int j = 0; j < n; j++)
-//         {
-//             C.get(j,i) = get(i,j);
-//             //C.set(j,i,get(i,j));
-//         }
-//     }
-//     return C;
-// }
+Matrix Matrix::operator ++ ()
+{
+    // Transpose Operator
+    Matrix C(n,m);
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            C.get(j,i) = get(i,j);
+            //C.set(j,i,get(i,j));
+        }
+    }
+    return C;
+}
 
 mel * Matrix::operator [] (const int &row)
 {
-    //return row * n + &p;
-    return &p[row*n];
+    return row * n + p;
+    //return &p[row*n];
 }
 
-mel &Matrix::operator ()(const int &row, const int &col)
+mel& Matrix::operator ()(const int &row, const int &col)
 {
     return get(row,col);
 }
