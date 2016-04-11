@@ -9,6 +9,7 @@
 
 #include "hexon.h"
 #include "controlwindow.h"
+#include "matrix.h"
 
 using namespace std;
 
@@ -22,6 +23,22 @@ int main(int argc, char *argv[])
         //QCoreApplication a(argc, argv);
 
         cout << "Hello World!\n";
+
+        Matrix A(2,2);
+        A.get(0,0) = 1;
+        A.get(0,1) = 2;
+        A.get(1,0) = 3;
+        A.get(1,1) = 4;
+        A.print_matrix();
+
+        Matrix B(2,2), C(2,2);
+        B = A;
+        B.print_matrix();
+        C = A + B;
+
+        std::cout << A.get(0,0) << "\t" << A[1][1] << "\t" << A(0,1) << std::endl;
+        C.print_matrix();
+
 
         ControlWindow w;
         //w.showMaximized();

@@ -32,6 +32,7 @@ Matrix::Matrix(int rows, int cols)
 Matrix::~Matrix()
 {
     delete [] p;
+    std::cout << "shutting down\n";
 }
 
 mel& Matrix::get(int row, int col)
@@ -44,24 +45,26 @@ mel Matrix::get(int row, int col) const
     return p[row*n+col];
 }
 
+/*
 void Matrix::set(int row, int col, mel val)
 {
     p[row*n+col] = val;
 }
+*/
 
-Matrix Matrix::operator = (const Matrix &B)
+void Matrix::operator = (const Matrix &B)
 {
-    /*
+
     if (m != B.m || n != B.n)
     {
-        std::cout << "Matrices dimensions do not match for + operation." << std::endl;
+        std::cout << "Matrices dimensions do not match for = operation." << std::endl;
         throw std::exception();
     }
-    */
+
     m = B.m;
     n = B.n;
 
-    Matrix C(m,n);
+    //p = new mel[m*n];
 
     for (int i = 0; i < m; i++)
     {
@@ -71,7 +74,7 @@ Matrix Matrix::operator = (const Matrix &B)
             //set(i,j,B.get(i,j));
         }
     }
-    return B;
+    return;
 }
 
 Matrix Matrix::operator + (const Matrix &B)
@@ -89,6 +92,8 @@ Matrix Matrix::operator + (const Matrix &B)
         for (int j = 0; j < n; j++)
         {
             C.get(i,j) = get(i,j) + B.get(i,j);
+            //C[i][j] = get(i,j) + B[i][j];
+            //C(i,j) = get(i,j) + B(i,j);
             //C.set(i,j,get(i,j) + B.get(i,j));
         }
     }
@@ -175,11 +180,27 @@ Matrix Matrix::operator ~ ()
     {
         for (int j = 0; j < n; j++)
         {
-            //C.get(j,i) = get(i,j);
-            C.set(j,i,get(i,j));
+            C.get(j,i) = get(i,j);
+            //C.set(j,i,get(i,j));
         }
     }
     return C;
+}
+
+mel * Matrix::operator [] (const int &row)
+{
+    //return row * n + &p;
+    return row*n + p;
+}
+
+mel &Matrix::operator ()(const int &row, const int &col)
+{
+    return get(row,col);
+}
+
+mel Matrix::operator ()(const int &row, const int &col) const
+{
+    return get(row,col);
 }
 
 void Matrix::print_matrix()
