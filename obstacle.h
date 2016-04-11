@@ -8,8 +8,8 @@ class Obstacle : public HexItem
 public:
     Obstacle();
     Obstacle(cube h);
-    int get_color();
-    cube get_pos();
+    int get_color() override;
+    cube get_pos() override;
     void advance(int step) Q_DECL_OVERRIDE;
 
 private:

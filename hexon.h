@@ -18,8 +18,8 @@ public:
 
     //QRectF boundingRect() const Q_DECL_OVERRIDE;
     void copy_hexon(const Hexon &A);
-    int get_color();
-    cube get_pos();
+    int get_color() override;
+    cube get_pos() override;
 
     //void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
 
