@@ -1,57 +1,89 @@
 #include "matrix.h"
 #include <iostream>
+#include <iterator>
 
-Matrix::Matrix(int rows, int cols)
-  : m(rows),
-    n(cols),
-    p(new mel[rows*cols])
-  //p(rows*cols)
+// Simple constructor
+Matrix::Matrix(int rows, int cols) : m(rows), n(cols), p(new mel[rows*cols])
 {
-    //m = rows;
-    //n = cols;
-
     if (m < 0 || n < 0)
     {
         std::cout << "\nMatrix dimensions must be positive.\n";
         m = 1;
         n = 1;
+        throw std::exception();
     }
     if (m > 1000 || n > 1000)
     {
         std::cout << "\nMatrix dimensions exceed 1000.\n";
         m = 1;
         n = 1;
+        throw std::exception();
     }
-
-     //p = new mel[m*n];
-     for (int i = 0; i < m; i++)
-     {
-         for (int j = 0; j < n; j++)
-         {
-             p[i*n+j] = 0;
-         }
-     }
 }
 
-
-Matrix::Matrix(Matrix&& other) : m(1), n(1), p(nullptr)
-{
-    m = other.m;
-    n = other.n;
-    p = other.p;
-
-    other.m = 1;
-    other.n = 1;
-    other.p = nullptr;
-}
-
+// Destructor
 Matrix::~Matrix()
 {
     if (p != nullptr)
     {
         delete [] p;
     }
-    std::cout << "shutting down\n";
+    //std::cout << "shutting down\n";
+}
+
+// Copy constructor
+Matrix::Matrix(const Matrix &B) : m(B.m), n(B.n), p(new mel[B.m*B.n])
+{
+    //std::copy(B.p, B.p + B.m*B.n, p);
+    std::copy(B.p, B.p + B.m*B.n, stdext::checked_array_iterator<mel*>(p, B.m*B.n));
+}
+
+// Move constructor
+Matrix::Matrix(Matrix&& B) : m(1), n(1), p(nullptr)
+{
+    m = B.m;
+    n = B.n;
+    p = B.p;
+
+    B.m = 1;
+    B.n = 1;
+    B.p = nullptr;
+}
+
+// Copy assignment operator
+Matrix& Matrix::operator = (const Matrix &B)
+{
+    if (this != &B)
+    {
+        delete [] p;
+
+        p = new mel[B.m*B.n];
+
+        m = B.m;
+        n = B.n;
+
+        //std::copy(B.p, B.p + B.m*B.n, p);
+        std::copy(B.p, B.p + B.m*B.n, stdext::checked_array_iterator<mel*>(p, B.m*B.n));
+    }
+    return *this;
+}
+
+// Move assignment operator
+Matrix& Matrix::operator = (Matrix&& B)
+{
+    if (this != &B)
+    {
+        delete [] p;
+
+        m = B.m;
+        n = B.n;
+        p = B.p;
+
+        B.m = 1;
+        B.n = 1;
+        B.p = nullptr;
+    }
+    return *this;
 }
 
 mel& Matrix::get(int row, int col)
@@ -64,36 +96,20 @@ mel Matrix::get(int row, int col) const
     return p[row*n+col];
 }
 
-/*
-void Matrix::set(int row, int col, mel val)
+mel* Matrix::operator [] (const int &row)
 {
-    p[row*n+col] = val;
+    return row * n + p;
+    //return &p[row*n];
 }
-*/
 
-void Matrix::operator = (const Matrix &B)
+mel& Matrix::operator ()(const int &row, const int &col)
 {
+    return get(row,col);
+}
 
-    if (m != B.m || n != B.n)
-    {
-        std::cout << "Matrices dimensions do not match for = operation." << std::endl;
-        throw std::exception();
-    }
-
-    m = B.m;
-    n = B.n;
-
-    //p = new mel[m*n];
-
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            get(i,j) = B.get(i,j);
-            //set(i,j,B.get(i,j));
-        }
-    }
-    return;
+mel Matrix::operator ()(const int &row, const int &col) const
+{
+    return get(row,col);
 }
 
 Matrix Matrix::operator + (const Matrix &B)
@@ -190,9 +206,9 @@ Matrix Matrix::operator * (const Matrix &B)
     return C;
 }
 
-Matrix Matrix::operator ++ ()
+// Transpose operator
+Matrix Matrix::operator ++ (int)
 {
-    // Transpose Operator
     Matrix C(n,m);
 
     for (int i = 0; i < m; i++)
@@ -204,22 +220,6 @@ Matrix Matrix::operator ++ ()
         }
     }
     return C;
-}
-
-mel * Matrix::operator [] (const int &row)
-{
-    return row * n + p;
-    //return &p[row*n];
-}
-
-mel& Matrix::operator ()(const int &row, const int &col)
-{
-    return get(row,col);
-}
-
-mel Matrix::operator ()(const int &row, const int &col) const
-{
-    return get(row,col);
 }
 
 void Matrix::print_matrix()
@@ -234,4 +234,9 @@ void Matrix::print_matrix()
         std::cout << std::endl;
     }
     return;
+}
+
+int Matrix::length()
+{
+    return m*n;
 }

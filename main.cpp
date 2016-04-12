@@ -13,8 +13,6 @@
 
 using namespace std;
 
-
-
 int main(int argc, char *argv[])
 {
     try
@@ -38,6 +36,12 @@ int main(int argc, char *argv[])
 
         std::cout << A.get(0,0) << "\t" << A[1][1] << "\t" << A(0,1) << std::endl;
         C.print_matrix();
+
+        A[1][0] = A[0][1];
+        A.print_matrix();
+        C(1,0) = C(0,0);
+        C.print_matrix();
+        B++.print_matrix();
 
 
         ControlWindow w;
