@@ -21,6 +21,24 @@ Matrix::Matrix(int rows, int cols) : m(rows), n(cols), p(new mel[rows*cols])
     }
 }
 
+Matrix::Matrix() : m(1), n(1), p(new mel[1])
+{
+    if (m < 0 || n < 0)
+    {
+        std::cout << "\nMatrix dimensions must be positive.\n";
+        m = 1;
+        n = 1;
+        throw std::exception();
+    }
+    if (m > 1000 || n > 1000)
+    {
+        std::cout << "\nMatrix dimensions exceed 1000.\n";
+        m = 1;
+        n = 1;
+        throw std::exception();
+    }
+}
+
 // Destructor
 Matrix::~Matrix()
 {
@@ -239,4 +257,14 @@ void Matrix::print_matrix()
 int Matrix::length()
 {
     return m*n;
+}
+
+int Matrix::rows()
+{
+    return m;
+}
+
+int Matrix::cols()
+{
+    return n;
 }

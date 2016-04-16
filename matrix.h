@@ -9,6 +9,7 @@ class Matrix
 {
 public:
     Matrix(int rows, int cols);
+    Matrix();
     ~Matrix();
     Matrix(const Matrix &B);
     Matrix(Matrix&& B);
@@ -30,6 +31,8 @@ public:
 
     void print_matrix();
     int length();
+    int rows();
+    int cols();
 
 private:
     int m,n;
