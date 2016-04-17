@@ -23,32 +23,8 @@ int main(int argc, char *argv[])
 
         cout << "Hello World!\n";
 
-        /*
-        Matrix A(4,1);
-        A.get(0,0) = 1;
-        A.get(1,0) = 2;
-        A.get(2,0) = 3;
-        A.get(3,0) = 4;
-        A.print_matrix();
-
-        //Matrix B(2,2), C(2,2);
-        Matrix B = A;
-        B.print_matrix();
-        Matrix C = A + B;
-
-        std::cout << A.get(0,0) << "\t" << A[1][0] << "\t" << A(2,0) << std::endl;
-        C.print_matrix();
-
-        A[1][0] = A[2][0];
-        A.print_matrix();
-        C(1,0) = C(0,0);
-        C.print_matrix();
-        B++.print_matrix();
-        Matrix D = B*C++;
-        D.print_matrix();
-        */
-        NNBase NN;
-
+        NNBase NN(10, 5, 20);
+        NN.feedforward().print_matrix();
 
         ControlWindow w;
         //w.showMaximized();

@@ -1,6 +1,7 @@
 #include "matrix.h"
 #include <iostream>
 #include <iterator>
+#include <cmath>
 
 // Simple constructor
 Matrix::Matrix(int rows, int cols) : m(rows), n(cols), p(new mel[rows*cols])
@@ -267,4 +268,12 @@ int Matrix::rows()
 int Matrix::cols()
 {
     return n;
+}
+
+void Matrix::activation()
+{
+    for (int i = 0; i < m*n; i++)
+    {
+        p[i] = 1/(1 + exp(p[i]));
+    }
 }

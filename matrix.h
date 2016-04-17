@@ -34,6 +34,8 @@ public:
     int rows();
     int cols();
 
+    void activation();
+
 private:
     int m,n;
     mel *p;
