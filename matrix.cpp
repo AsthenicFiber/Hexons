@@ -3,6 +3,25 @@
 #include <iterator>
 #include <cmath>
 
+
+// checked_array_iterator is defiend by MSVC 2005 and later
+// https://msdn.microsoft.com/en-us/library/aa985928(v=vs.80).aspx
+#if defined(_MSC_VER) || _MSC_VER < 1400
+// MSVC 2005 has _MSC_VER = 1400
+// https://en.wikipedia.org/wiki/Visual_C%2B%2B#Common_MSVC_version
+
+// http://stackoverflow.com/questions/25716841/checked-array-iteratort-in-c11#comment40464386_25716929
+namespace stdext
+{
+    template<typename T> inline T checked_array_iterator(T arr, size_t)
+    {
+        return arr;
+    }
+}
+
+#endif
+
+
 // Simple constructor
 Matrix::Matrix(int rows, int cols) : m(rows), n(cols), p(new mel[rows*cols])
 {
