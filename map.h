@@ -11,6 +11,7 @@ struct tree_node
 {
     cube h;
     std::vector <cube> branches;
+    int in;
 };
 
 int find_cube(std::vector <cube> A, cube h);

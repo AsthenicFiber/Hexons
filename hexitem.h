@@ -5,8 +5,27 @@
 #include <QGraphicsItem>
 #include "hex.h"
 
+struct hsv
+{
+    // range 0-359
+    int hue;
+    // range 0-255
+    //int sat;
+    int val;
+};
+
+struct rgb
+{
+    int red;
+    int green;
+    int blue;
+};
+
 
 QColor rgb2color(int rgbHex);
+QColor hsv2color(hsv cHSV);
+hsv color2hsv(QColor C);
+rgb color2rgb(QColor C);
 
 class HexItem : public QGraphicsItem
 {

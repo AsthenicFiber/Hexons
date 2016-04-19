@@ -253,9 +253,9 @@ int Hexant(cube A)
             return 1;
         }
     }
-    else if ((B.z == -1))
+    else if (B.z == -1)
     {
-        if ((B.y == 0))
+        if (B.y == 0)
         {
             return 2;
         }
@@ -264,9 +264,9 @@ int Hexant(cube A)
             return -2;
         }
     }
-    else if ((B.y == 1))
+    else if (B.y == 1)
     {
-        if ((B.x == 0))
+        if (B.x == 0)
         {
             return 3;
         }
@@ -275,9 +275,9 @@ int Hexant(cube A)
             return -3;
         }
     }
-    else if ((B.x == -1))
+    else if (B.x == -1)
     {
-        if ((B.z == 0))
+        if (B.z == 0)
         {
             return 4;
         }
@@ -286,9 +286,9 @@ int Hexant(cube A)
             return -4;
         }
     }
-    else if ((B.z == 1))
+    else if (B.z == 1)
     {
-        if ((B.y == 0))
+        if (B.y == 0)
         {
             return 5;
         }
@@ -297,7 +297,7 @@ int Hexant(cube A)
             return -5;
         }
     }
-    else if ((B.y == -1))
+    else if (B.y == -1)
     {
         return 6;
     }

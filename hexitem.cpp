@@ -46,3 +46,17 @@ QColor rgb2color(int rgbHex)
     return QColor(red, green, blue, 255);
 }
 
+QColor hsv2color(hsv C)
+{
+    return QColor().fromHsv(C.hue, 255, C.val, 255);
+}
+
+hsv color2hsv(QColor C)
+{
+    return hsv{C.hue(),C.value()};
+}
+
+rgb color2rgb(QColor C)
+{
+    return rgb{C.red(),C.green(),C.blue()};
+}

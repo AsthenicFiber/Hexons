@@ -50,11 +50,13 @@ void Map::generate_pcvt()
 {
     // A = 3*(r-1)*r+1 = 3*r^2 - 3*r + 1
     cube h = global_origin;
+    int ind = 0;
 
     std::vector <cube> cube_vector;
     tree_node node;
     node.h = h;
     node.branches = cube_vector;
+    node.in = ind++;
     pcvt[h] = node;
 
     for (int i=1; i<12; i++)
@@ -65,6 +67,7 @@ void Map::generate_pcvt()
             //std::vector <cube> cube_vector;
             //tree_node node;
             node.h = h;
+            node.in = ind++;
             //node.branches = cube_vector;
             pcvt[h] = node;
             //std::cout << "\n" << h.x << "\t" << h.y << "\t" << h.z;
@@ -82,7 +85,7 @@ void Map::generate_pcvt()
             h = cube_rotate(h, global_origin, true);
         }
     }
-    std::cout << "\n" << pcvt.size() << "\n";
+    std::cout << "\n" << pcvt.size() << "\t" << ind << "\n";
     return;
 }
 
@@ -98,7 +101,7 @@ void Map::print_pcvt()
     for (std::map <cube,tree_node>::iterator it = pcvt.begin(); it != pcvt.end(); ++it)
     {
         cube h = it->first;
-        ofs << "\n" << h.x << "\t" << h.y << "\t" << h.z;
+        ofs << "\n" << pcvt[h].in << "\n" << h.x << "\t" << h.y << "\t" << h.z;
         for (unsigned int i = 0; i < pcvt[h].branches.size(); i++)
         {
             cube H = pcvt[h].branches[i];
