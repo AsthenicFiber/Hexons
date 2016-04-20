@@ -6,11 +6,13 @@
 
 // checked_array_iterator is defiend by MSVC 2005 and later
 // https://msdn.microsoft.com/en-us/library/aa985928(v=vs.80).aspx
-#if defined(_MSC_VER) || _MSC_VER < 1400
+//#if defined(_MSC_VER) || _MSC_VER < 1400
 // MSVC 2005 has _MSC_VER = 1400
 // https://en.wikipedia.org/wiki/Visual_C%2B%2B#Common_MSVC_version
 
 // http://stackoverflow.com/questions/25716841/checked-array-iteratort-in-c11#comment40464386_25716929
+
+/*
 namespace stdext
 {
     template<typename T> inline T checked_array_iterator(T arr, size_t)
@@ -18,8 +20,9 @@ namespace stdext
         return arr;
     }
 }
+*/
 
-#endif
+//#endif
 
 
 // Simple constructor
@@ -72,8 +75,11 @@ Matrix::~Matrix()
 // Copy constructor
 Matrix::Matrix(const Matrix &B) : m(B.m), n(B.n), p(new mel[B.m*B.n])
 {
-    //std::copy(B.p, B.p + B.m*B.n, p);
+    #if defined(_MSC_VER) && _MSC_VER >= 1400
     std::copy(B.p, B.p + B.m*B.n, stdext::checked_array_iterator<mel*>(p, B.m*B.n));
+    #else
+    std::copy(B.p, B.p + B.m*B.n, p);
+    #endif
 }
 
 // Move constructor
@@ -100,8 +106,13 @@ Matrix& Matrix::operator = (const Matrix &B)
         m = B.m;
         n = B.n;
 
-        //std::copy(B.p, B.p + B.m*B.n, p);
+        #if defined(_MSC_VER) && _MSC_VER >= 1400
         std::copy(B.p, B.p + B.m*B.n, stdext::checked_array_iterator<mel*>(p, B.m*B.n));
+        #else
+        std::copy(B.p, B.p + B.m*B.n, p);
+        #endif
+        //std::copy(B.p, B.p + B.m*B.n, p);
+        //std::copy(B.p, B.p + B.m*B.n, stdext::checked_array_iterator<mel*>(p, B.m*B.n));
     }
     return *this;
 }

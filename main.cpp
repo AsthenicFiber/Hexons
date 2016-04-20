@@ -12,7 +12,7 @@
 //#include "matrix.h"
 #include "nnbase.h"
 
-using namespace std;
+//using namespace std;
 
 int main(int argc, char *argv[])
 {
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
         QApplication a(argc, argv);
         //QCoreApplication a(argc, argv);
 
-        cout << "Hello World!\n";
+        std::cout << "Hello World!\n";
 
         NNBase NN(10, 5, 20);
         NN.feedforward().print_matrix();
