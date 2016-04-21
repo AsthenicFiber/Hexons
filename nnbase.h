@@ -6,7 +6,10 @@
 class NNBase
 {
 public:
+    NNBase();
     NNBase(int n_in, int n_out, int n_n);
+    void set_size(int n_in, int n_out, int n_n);
+    void set_inputs(Matrix input);
     Matrix feedforward();
     NNBase breed(NNBase B, int mode, int mutation);
 

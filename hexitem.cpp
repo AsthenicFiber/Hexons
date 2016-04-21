@@ -10,6 +10,8 @@
 HexItem::HexItem()
 {
     color = QColor(Qt::blue);
+    hex = global_origin;
+    vis = false;
 }
 
 void HexItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
@@ -22,7 +24,7 @@ void HexItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget
     QPen pen(Qt::white, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
     QBrush brush(Qt::SolidPattern);
 
-    color = rgb2color(get_color());
+    //color = hsv2color(get_color());
 
     brush.setColor(color);
 
@@ -36,6 +38,28 @@ void HexItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget
 QRectF HexItem::boundingRect() const
 {
     return QRectF(-20,-17,40,34);
+}
+
+hsv HexItem::get_color()
+{
+    return color2hsv(color);
+    //return 0x703d0b;
+}
+
+cube HexItem::get_pos()
+{
+    return hex;
+}
+
+bool HexItem::has_vis()
+{
+    return vis;
+}
+
+void HexItem::set_vis(Matrix vision)
+{
+    vision;
+    return;
 }
 
 QColor rgb2color(int rgbHex)

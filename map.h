@@ -3,6 +3,7 @@
 
 #include "hexon.h"
 #include "obstacle.h"
+#include "matrix.h"
 #include <map>
 #include <vector>
 
@@ -35,6 +36,9 @@ private:
     std::map <cube,HexItem*> grid;
     std::map <cube,tree_node> pcvt;
     std::vector <cube> los(cube h);
+    Matrix vision;
+    int visibility;
+    Matrix find_vis(cube h);
 
 };
 

@@ -4,6 +4,7 @@
 
 #include <QGraphicsItem>
 #include "hex.h"
+#include "matrix.h"
 
 struct hsv
 {
@@ -36,12 +37,18 @@ public:
 
     QRectF boundingRect() const Q_DECL_OVERRIDE;
     //void copy_hexon(Hexon A);
-    virtual int get_color() = 0;
-    virtual cube get_pos() = 0;
+    //virtual hsv get_color() = 0;
+    hsv get_color();
+    //virtual cube get_pos() = 0;
+    cube get_pos();
+    bool has_vis();
+    virtual void set_vis(Matrix vision);
+    virtual void advance(int step) = 0;
 
 protected:
     QColor color;
-
+    cube hex;
+    bool vis;
 private:
 
 };

@@ -1,6 +1,19 @@
 #include "nnbase.h"
 #include <random>
 
+NNBase::NNBase()
+{
+    inputs = 1;
+    outputs = 1;
+    nodes = 1;
+    w1 = Matrix(nodes,inputs);
+    w2 = Matrix(outputs,nodes);
+    inp = Matrix(inputs,1);
+    outp = Matrix(outputs,1);
+    n1 = Matrix(nodes,1);
+    init_weights();
+}
+
 NNBase::NNBase(int n_in, int n_out, int n_n)
 {
     inputs = n_in;
@@ -12,6 +25,28 @@ NNBase::NNBase(int n_in, int n_out, int n_n)
     outp = Matrix(n_out,1);
     n1 = Matrix(n_n,1);
     init_weights();
+}
+
+void NNBase::set_size(int n_in, int n_out, int n_n)
+{
+    inputs = n_in;
+    outputs = n_out;
+    nodes = n_n;
+    w1 = Matrix(n_n,n_in);
+    w2 = Matrix(n_out,n_n);
+    inp = Matrix(n_in,1);
+    outp = Matrix(n_out,1);
+    n1 = Matrix(n_n,1);
+    init_weights();
+}
+
+void NNBase::set_inputs(Matrix input)
+{
+    if (inputs == input.rows())
+    {
+        inp = input;
+    }
+    return;
 }
 
 Matrix NNBase::feedforward()

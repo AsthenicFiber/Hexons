@@ -7,6 +7,8 @@ Obstacle::Obstacle()
     hex.z = -hex.y - hex.x;
     pix p = cube2pix(hex);
     setPos(p.x,p.y);
+    color = rgb2color(0x703d0b);
+    vis = false;
 }
 
 Obstacle::Obstacle(cube h)
@@ -14,17 +16,22 @@ Obstacle::Obstacle(cube h)
     hex = h;
     pix p = cube2pix(hex);
     setPos(p.x,p.y);
+    color = rgb2color(0x703d0b);
+    vis = false;
 }
 
-int Obstacle::get_color()
+/*
+hsv Obstacle::get_color()
 {
-    return 0x703d0b;
+    return color2hsv(color);
+    //return 0x703d0b;
 }
 
 cube Obstacle::get_pos()
 {
     return hex;
 }
+*/
 
 void Obstacle::advance(int step)
 {

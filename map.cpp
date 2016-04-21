@@ -7,6 +7,7 @@ Map::Map()
     //HexMap.push_back(new Hexon(3,-4));
     //xi.push_back(index{0,0});
 
+    visibility = 4;
     generate_pcvt();
     print_pcvt();
 
@@ -19,10 +20,17 @@ void Map::map_update()
 {
     for (std::map <cube,HexItem*>::iterator it = grid.begin(); it != grid.end(); ++it)
     {
-        //cube h = it->first;
-        //grid[h]->advance(1);
-        it->second->advance(1);
+        cube h = it->first;
+
+        if (grid[h]->has_vis())
+        {
+            grid[h]->set_vis(find_vis(h));
+        }
+
+        grid[h]->advance(1);
+        //it->second->advance(1);
     }
+    // Update positions of hexitems in map
 }
 
 void Map::AddHexItem(HexItem *A)
@@ -59,7 +67,7 @@ void Map::generate_pcvt()
     node.in = ind++;
     pcvt[h] = node;
 
-    for (int i=1; i<12; i++)
+    for (int i=1; i<visibility; i++)
     {
         h = cube_add(h,cube{1,-1,0});
         for (int j=0; j<6*i; j++)
@@ -110,6 +118,12 @@ void Map::print_pcvt()
     }
     std::cout << "\n";
     ofs.close();
+}
+
+Matrix Map::find_vis(cube h)
+{
+    h;
+    return Matrix(2*(3*(visibility-1)*visibility+1),1);
 }
 
 int find_cube(std::vector<cube> A, cube h)

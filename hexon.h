@@ -3,32 +3,20 @@
 #ifndef HEXON_H
 #define HEXON_H
 
-//#include <QGraphicsItem>
-//#include "hex.h"
 #include "hexitem.h"
+#include "nnbase.h"
 
-//class Hexon : public QGraphicsItem
 class Hexon : public HexItem
-//class Hexon
 {
 public:
     Hexon(int a, int b);
-    //void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
-    //void paintEvent(QPaintEvent *event);
-
-    //QRectF boundingRect() const Q_DECL_OVERRIDE;
+    Hexon(cube h);
     void copy_hexon(const Hexon &A);
-    int get_color() override;
-    cube get_pos() override;
-
-    //void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
-
+    void set_vis(Matrix vision) override;
     void advance(int step) Q_DECL_OVERRIDE;
-    //void advance();
 
 private:
-    //Hex hex;
-    cube hex;
+    NNBase brain;
 };
 
 #endif // HEXON_H
