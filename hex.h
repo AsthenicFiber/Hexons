@@ -22,6 +22,10 @@ struct cube
     {
         return (x < h.x) || (x == h.x && y < h.y);
     }
+    cube operator + (const cube &h) const
+    {
+        return cube{x+h.x,y+h.y,z+h.z};
+    }
     bool operator == (const cube &h) const
     {
         return (x == h.x && y == h.y);

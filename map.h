@@ -36,10 +36,9 @@ private:
     std::map <cube,HexItem*> grid;
     std::map <cube,tree_node> pcvt;
     std::vector <cube> los(cube h);
-    Matrix vision;
     int visibility;
     Matrix find_vis(cube h);
-
+    Matrix vis_tree(cube h, cube H, Matrix vision);
 };
 
 #endif // MAP_H

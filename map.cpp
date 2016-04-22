@@ -122,8 +122,29 @@ void Map::print_pcvt()
 
 Matrix Map::find_vis(cube h)
 {
-    h;
-    return Matrix(2*(3*(visibility-1)*visibility+1),1);
+    //Matrix vision(2*(3*(visibility-1)*visibility+1),1);
+    Matrix vision(2*pcvt.size(),1);
+    vision *= 0;
+    vis_tree(h, global_origin, vision);
+    return vision;
+}
+
+Matrix Map::vis_tree(cube h, cube H, Matrix vision)
+{
+    for (unsigned int i = 0; i < pcvt[H].branches.size(); i++)
+    {
+        if (grid.count(pcvt[H].branches[i] + h) == 1)
+        {
+            hsv color = grid[pcvt[H].branches[i] + h]->get_color();
+            vision[pcvt[pcvt[H].branches[i]].in][1] = color.hue/359;
+            vision[pcvt[pcvt[H].branches[i]].in + 1][1] = color.val/255;
+        }
+        else
+        {
+            vision = vis_tree(h, pcvt[H].branches[i], vision);
+        }
+    }
+    return vision;
 }
 
 int find_cube(std::vector<cube> A, cube h)
