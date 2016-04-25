@@ -41,7 +41,7 @@ void Hexon::copy_hexon(const Hexon &A)
 
 void Hexon::set_vis(Matrix vision)
 {
-
+    brain.set_inputs(vision);
 }
 
 void Hexon::advance(int step)
@@ -55,7 +55,14 @@ void Hexon::advance(int step)
     //cube h = cube_rotate(hex.H, origin, false);
     //hex.H = h;
 
-    hex = cube_rotate(hex,global_origin,false);
+    Matrix A = brain.feedforward();
+
+    cube dh = {A[0][0],A[1][0],-A[0][0]-A[1][0]};
+    hex = hex+dh;
+
+    color = hsv2color({A[2][0],A[3][0]});
+
+    //hex = cube_rotate(hex,global_origin,false);
 
     //pix p = hex.loc();
     pix p = cube2pix(hex);

@@ -20,7 +20,7 @@ void Map::map_update()
 {
     for (std::map <cube,HexItem*>::iterator it = grid.begin(); it != grid.end(); ++it)
     {
-        cube h = it->first;
+        const cube h = it->first;
 
         if (grid[h]->has_vis())
         {
@@ -28,9 +28,30 @@ void Map::map_update()
         }
 
         grid[h]->advance(1);
+
+        cube H = grid[h]->get_pos();
+        if (h != H)
+        {
+            AddHexItem(grid[h]);
+            //grid[H] = grid[h];
+            grid.erase(h);
+        }
         //it->second->advance(1);
     }
     // Update positions of hexitems in map
+    /*
+    for (std::map <cube,HexItem*>::iterator it = grid.begin(); it != grid.end(); ++it)
+    {
+        cube h = it->first;
+
+        cube H = grid[h]->get_pos();
+        if (h != H)
+        {
+            grid[H] = grid[h];
+            grid.erase(h);
+        }
+    }
+    */
 }
 
 void Map::AddHexItem(HexItem *A)
@@ -123,7 +144,7 @@ void Map::print_pcvt()
 Matrix Map::find_vis(cube h)
 {
     //Matrix vision(2*(3*(visibility-1)*visibility+1),1);
-    Matrix vision(2*pcvt.size(),1);
+    Matrix vision(2*(int)pcvt.size(),1);
     vision *= 0;
     vis_tree(h, global_origin, vision);
     return vision;

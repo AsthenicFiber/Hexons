@@ -30,6 +30,10 @@ struct cube
     {
         return (x == h.x && y == h.y);
     }
+    bool operator != (const cube &h) const
+    {
+        return (x != h.x || y != h.y);
+    }
     void operator ~ ()
     {
         z = -x-y;
