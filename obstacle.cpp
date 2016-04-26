@@ -41,7 +41,7 @@ void Obstacle::advance(int step)
     }
     //cube origin = {0,0,0};
 
-    hex = cube_rotate(hex, global_origin, true);
+    //hex = cube_rotate(hex, global_origin, true);
 
     //hex.H = h;
 

@@ -34,7 +34,7 @@ void Map::map_update()
         {
             AddHexItem(grid[h]);
             //grid[H] = grid[h];
-            grid.erase(h);
+            it = --grid.erase(it);
         }
         //it->second->advance(1);
     }
