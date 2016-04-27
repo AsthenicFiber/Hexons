@@ -3,7 +3,7 @@
 //#include <QStyleOption>
 //#include <iostream>
 
-//#include <math.h>
+#include <cmath>
 
 #include "hexon.h"
 
@@ -57,7 +57,9 @@ void Hexon::advance(int step)
 
     Matrix A = brain.feedforward();
 
+    //cube dh = {round(A[0][0]),round(A[1][0]),-round(A[0][0])-round(A[1][0])};
     cube dh = {A[0][0],A[1][0],-A[0][0]-A[1][0]};
+    //cube dh = cube(A[0][0],A[1][0]);
     hex = hex+dh;
 
     color = hsv2color({A[2][0],A[3][0]});
