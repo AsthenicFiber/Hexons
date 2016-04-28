@@ -21,6 +21,7 @@ class Map
 {
 public:
     Map();
+    ~Map();
     void map_update();
     void AddHexItem(HexItem *A);
     void RemoveHexItem(HexItem *A);

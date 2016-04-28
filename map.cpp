@@ -16,8 +16,17 @@ Map::Map()
 
 }
 
+Map::~Map()
+{
+    for (std::map <cube,HexItem*>::iterator it = grid.begin(); it != grid.end(); ++it)
+    {
+        delete it->second;
+    }
+}
+
 void Map::map_update()
 {
+    std::vector <cube> move_list;
     for (std::map <cube,HexItem*>::iterator it = grid.begin(); it != grid.end(); ++it)
     {
         const cube h = it->first;
@@ -32,11 +41,18 @@ void Map::map_update()
         cube H = grid[h]->get_pos();
         if (h != H)
         {
-            AddHexItem(grid[h]);
+            // log for updating position
+            move_list.push_back(h);
+            //AddHexItem(grid[h]);
             //grid[H] = grid[h];
-            it = --grid.erase(it);
+            //it = --grid.erase(it);
         }
         //it->second->advance(1);
+    }
+    for (unsigned int i = 0; i < move_list.size(); i++)
+    {
+        AddHexItem(grid[move_list[i]]);
+        grid.erase(move_list[i]);
     }
     // Update positions of hexitems in map
     /*

@@ -57,8 +57,8 @@ void Hexon::advance(int step)
 
     Matrix A = brain.feedforward();
 
-    //cube dh = {round(A[0][0]),round(A[1][0]),-round(A[0][0])-round(A[1][0])};
-    cube dh = {A[0][0],A[1][0],-A[0][0]-A[1][0]};
+    cube dh = {std::round(A[0][0]),std::round(A[1][0]),-std::round(A[0][0])-std::round(A[1][0])};
+    //cube dh = {A[0][0],A[1][0],-A[0][0]-A[1][0]};
     //cube dh = cube(A[0][0],A[1][0]);
     hex = hex+dh;
 
