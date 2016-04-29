@@ -62,7 +62,7 @@ void Hexon::advance(int step)
     //cube dh = cube(A[0][0],A[1][0]);
     hex = hex+dh;
 
-    color = hsv2color({A[2][0],A[3][0]});
+    color = hsv2color({std::round(359*A[2][0]),std::round(255*A[3][0])});
 
     //hex = cube_rotate(hex,global_origin,false);
 
