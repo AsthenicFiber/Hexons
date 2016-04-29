@@ -73,7 +73,7 @@ void ControlWindow::on_startButton_clicked()
     view.show();
 
     connect(&timer, SIGNAL(timeout()), this, SLOT(tick_update()));
-    timer.start(1000/20);
+    timer.start(1000/2);
 }
 
 void ControlWindow::tick_update()

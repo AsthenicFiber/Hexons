@@ -70,6 +70,7 @@ const cube dir6 = {1,0,-1};
 const cube global_origin = {0,0,0};
 
 const cube hex_dir[15] = {global_origin,dir1,dir2,dir3,dir4,dir5,dir6,dir1,global_origin,dir4,dir5,dir6,dir1,dir2,dir3};
+const cube hex_dir1[8] = {global_origin,global_origin,dir1,dir2,dir3,dir4,dir5,dir6};
 
 class Hex
 {

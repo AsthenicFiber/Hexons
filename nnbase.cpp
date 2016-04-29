@@ -4,6 +4,8 @@
 
 //typedef std::chrono::high_resolution_clock myclock;
 
+int seed_1 = 0;
+
 NNBase::NNBase()
 {
     inputs = 1;
@@ -75,7 +77,7 @@ NNBase NNBase::breed(NNBase B, int mode, int mutation)
     {
         // random weighted average
         unsigned seed1 = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
-        std::default_random_engine generator (seed1);
+        std::default_random_engine generator (seed1 + seed_1++);
         std::uniform_real_distribution<mel> distribution(0,1.0);
         mel x = distribution(generator);
 
@@ -118,7 +120,7 @@ NNBase NNBase::breed(NNBase B, int mode, int mutation)
     if (!(rand() % mutation))
     {
         unsigned seed1 = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
-        std::default_random_engine generator (seed1);
+        std::default_random_engine generator (seed1 + seed_1++);
         std::uniform_real_distribution<mel> distribution(-1.0,1.0);
 
         if (rand() % 2)
@@ -135,12 +137,12 @@ NNBase NNBase::breed(NNBase B, int mode, int mutation)
 
 void NNBase::init_weights()
 {
-    //unsigned seed1 = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
+    unsigned seed1 = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
     //myclock::time_point begin_clock = myclock::now();
     //myclock::duration d = myclock::now() - begin_clock;
     //unsigned int seed1 = d.count();
-    unsigned seed1 = 102264135;
-    std::default_random_engine generator (seed1);
+    //unsigned seed1 = 102264135;
+    std::default_random_engine generator (seed1 + seed_1++);
     std::uniform_real_distribution<mel> distribution(-1.0,1.0);
 
     for (int i = 0; i < w1.rows(); i++)

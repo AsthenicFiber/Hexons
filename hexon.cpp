@@ -57,12 +57,13 @@ void Hexon::advance(int step)
 
     Matrix A = brain.feedforward();
 
-    cube dh = {std::round(A[0][0]),std::round(A[1][0]),-std::round(A[0][0])-std::round(A[1][0])};
+    cube dh = hex_dir1[(int)((std::round(A[0][0]) * 4) + (std::round(A[1][0]) * 2) + std::round(A[2][0]))];
+    //cube dh = {std::round(A[0][0]),std::round(A[1][0]),-std::round(A[0][0])-std::round(A[1][0])};
     //cube dh = {A[0][0],A[1][0],-A[0][0]-A[1][0]};
     //cube dh = cube(A[0][0],A[1][0]);
     hex = hex+dh;
 
-    color = hsv2color({std::round(359*A[2][0]),std::round(255*A[3][0])});
+    color = hsv2color({std::round(359*A[3][0]),std::round(255*A[4][0])});
 
     //hex = cube_rotate(hex,global_origin,false);
 
