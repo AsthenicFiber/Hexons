@@ -7,7 +7,7 @@ Map::Map()
     //HexMap.push_back(new Hexon(3,-4));
     //xi.push_back(index{0,0});
 
-    visibility = 4;
+    visibility = 6;
     generate_pcvt();
     print_pcvt();
 
@@ -159,10 +159,20 @@ void Map::print_pcvt()
 
 Matrix Map::find_vis(cube h)
 {
+    /*
+    std::ofstream ofs;
+    char fname[20];
+    sprintf(fname,"vision_%d_%d_%d.txt",h.x,h.y,h.z);
+    ofs.open(fname, std::ofstream::out);
+    ofs << h.x << "\t" << h.y << "\t" << h.z << std::endl;
+*/
     //Matrix vision(2*(3*(visibility-1)*visibility+1),1);
     Matrix vision(2*(int)pcvt.size(),1);
     vision *= 0;
+    //vis_tree(h, global_origin, vision, ofs);
     vis_tree(h, global_origin, vision);
+
+    //ofs.close();
     return vision;
 }
 
@@ -179,6 +189,25 @@ Matrix Map::vis_tree(cube h, cube H, Matrix vision)
         else
         {
             vision = vis_tree(h, pcvt[H].branches[i], vision);
+        }
+    }
+    return vision;
+}
+
+Matrix Map::vis_tree(cube h, cube H, Matrix vision, std::ofstream& ofs)
+{
+    for (unsigned int i = 0; i < pcvt[H].branches.size(); i++)
+    {
+        if (grid.count(pcvt[H].branches[i] + h) == 1)
+        {
+            hsv color = grid[pcvt[H].branches[i] + h]->get_color();
+            vision[pcvt[pcvt[H].branches[i]].in][1] = color.hue/359;
+            vision[pcvt[pcvt[H].branches[i]].in + 1][1] = color.val/255;
+            ofs << H.x  << "\t" << H.y << "\t" << H.z << "\t" << cube2pix(H).x << "\t" << cube2pix(H).y << "\t" << color.hue << "\t" << color.val << std::endl;
+        }
+        else
+        {
+            vision = vis_tree(h, pcvt[H].branches[i], vision, ofs);
         }
     }
     return vision;
