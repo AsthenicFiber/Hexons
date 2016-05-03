@@ -50,28 +50,43 @@ void Hexon::advance(int step)
     {
         return;
     }
-    //cube origin = {0,0,0};
 
-    //cube h = cube_rotate(hex.H, origin, false);
-    //hex.H = h;
-
-    Matrix A = brain.feedforward();
-
-    cube dh = hex_dir1[(int)((std::round(A[0][0]) * 4) + (std::round(A[1][0]) * 2) + std::round(A[2][0]))];
-    //cube dh = {std::round(A[0][0]),std::round(A[1][0]),-std::round(A[0][0])-std::round(A[1][0])};
-    //cube dh = {A[0][0],A[1][0],-A[0][0]-A[1][0]};
-    //cube dh = cube(A[0][0],A[1][0]);
+    // update position
     hex = hex+dh;
-
-    color = hsv2color({std::round(359*A[3][0]),std::round(255*A[4][0])});
-
-    //hex = cube_rotate(hex,global_origin,false);
-
-    //pix p = hex.loc();
     pix p = cube2pix(hex);
 
     setPos(p.x,p.y);
     //std::cout << "\n" << p.x << "\t" << p.y;
-    //setPos(mapToParent(x, y));
     return;
+}
+
+cube Hexon::tstep()
+{
+    Matrix A = brain.feedforward();
+
+    dh = hex_dir1[(int)((std::round(A[0][0]) * 4) + (std::round(A[1][0]) * 2) + std::round(A[2][0]))];
+    color = hsv2color({std::round(359*A[3][0]),std::round(255*A[4][0])});
+
+    //pix p = cube2pix(hex);
+
+    //setPos(p.x,p.y);
+    //std::cout << "\n" << p.x << "\t" << p.y;
+    return dh;
+}
+
+int Hexon::interact(HexItem *hitem)
+{
+    if (hitem->has_vis())
+    {
+        rgb Crgb = color2rgb(hitem->color);
+        hsv Chsv = color2hsv(hitem->color);
+    }
+    else
+    {
+        dh = global_origin;
+        return 0;
+        // don't move
+    }
+
+    return 1;
 }

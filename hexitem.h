@@ -45,10 +45,16 @@ public:
     virtual void set_vis(Matrix vision);
     virtual void advance(int step) = 0;
 
-protected:
+    virtual cube tstep() = 0;
+    virtual int interact(HexItem *hitem) = 0;
+
     QColor color;
+
+protected:
+    //QColor color;
     cube hex;
     bool vis;
+    cube dh;
 private:
 
 };

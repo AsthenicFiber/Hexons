@@ -27,6 +27,7 @@ Map::~Map()
 void Map::map_update()
 {
     std::vector <cube> move_list;
+    std::vector <cube> erase_list;
     for (std::map <cube,HexItem*>::iterator it = grid.begin(); it != grid.end(); ++it)
     {
         const cube h = it->first;
@@ -36,38 +37,44 @@ void Map::map_update()
             grid[h]->set_vis(find_vis(h));
         }
 
-        grid[h]->advance(1);
-
-        cube H = grid[h]->get_pos();
-        if (h != H)
+        cube dh = grid[h]->tstep();
+        if (dh != global_origin)
         {
-            // log for updating position
-            move_list.push_back(h);
-            //AddHexItem(grid[h]);
-            //grid[H] = grid[h];
-            //it = --grid.erase(it);
+            if (grid.count(h+dh))
+            {
+                int stat = grid[h]->interact(grid[h+dh]);
+
+                switch(stat)
+                {
+                case 1:
+                    // log for updating position
+                    move_list.push_back(h);
+                    break;
+                case 2:
+                    // log for erasure
+                    erase_list.push_back(h);
+                    break;
+                }
+            }
         }
-        //it->second->advance(1);
     }
+    // erase hex items
+    for (unsigned int i = 0; i < erase_list.size(); i++)
+    {
+        grid.erase(erase_list[i]);
+    }
+    // move hex items that move
     for (unsigned int i = 0; i < move_list.size(); i++)
     {
         AddHexItem(grid[move_list[i]]);
         grid.erase(move_list[i]);
     }
-    // Update positions of hexitems in map
-    /*
+    // draw hex items
     for (std::map <cube,HexItem*>::iterator it = grid.begin(); it != grid.end(); ++it)
     {
-        cube h = it->first;
-
-        cube H = grid[h]->get_pos();
-        if (h != H)
-        {
-            grid[H] = grid[h];
-            grid.erase(h);
-        }
+        it->second->advance(1);
     }
-    */
+
 }
 
 void Map::AddHexItem(HexItem *A)

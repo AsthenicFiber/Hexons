@@ -14,6 +14,8 @@ public:
     void copy_hexon(const Hexon &A);
     void set_vis(Matrix vision) override;
     void advance(int step) Q_DECL_OVERRIDE;
+    cube tstep() override;
+    int interact(HexItem *hitem) override;
 
 private:
     NNBase brain;

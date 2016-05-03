@@ -20,32 +20,29 @@ Obstacle::Obstacle(cube h)
     vis = false;
 }
 
-/*
-hsv Obstacle::get_color()
-{
-    return color2hsv(color);
-    //return 0x703d0b;
-}
-
-cube Obstacle::get_pos()
-{
-    return hex;
-}
-*/
-
 void Obstacle::advance(int step)
 {
     if (!step)
     {
         return;
     }
-    //cube origin = {0,0,0};
-
     //hex = cube_rotate(hex, global_origin, true);
 
-    //hex.H = h;
-
+    hex = hex + dh;
     pix p = cube2pix(hex);
     setPos(p.x,p.y);
     return;
+}
+
+cube Obstacle::tstep()
+{
+    //pix p = cube2pix(hex);
+    //setPos(p.x,p.y);
+    dh = global_origin;
+    return dh;
+}
+
+int Obstacle::interact(HexItem *hitem)
+{
+    return 0;
 }

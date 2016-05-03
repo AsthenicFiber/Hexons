@@ -12,6 +12,9 @@ public:
     //cube get_pos() override;
     void advance(int step) Q_DECL_OVERRIDE;
 
+    cube tstep() override;
+    int interact(HexItem *hitem) override;
+
 private:
     //cube hex;
 };
