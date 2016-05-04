@@ -28,7 +28,7 @@ void Obstacle::advance(int step)
     }
     //hex = cube_rotate(hex, global_origin, true);
 
-    hex = hex + dh;
+    //hex = hex + dh;
     pix p = cube2pix(hex);
     setPos(p.x,p.y);
     return;

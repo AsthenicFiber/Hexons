@@ -38,17 +38,17 @@ void ControlWindow::on_startButton_clicked()
     //hexons.push_back(new Hexon(15,-9));
 
     //for (unsigned int i = 0; i < hexons.size(); i++)
-    for (unsigned int i = 0; i < 10; i++)
+    for (unsigned int i = 0; i < 20; i++)
     {
         //scene.addItem(hexons[i]);
         int a = (rand() % 39) - 20;
         int b = (rand() % 39) - 20;
         cube h = {a,b,-a-b};
-        hex_map.AddHexItem(new Hexon(h));
-        scene.addItem(hex_map[h]);
+        hex_map.AddHexItem(new Hexon(h), &scene);
+        //scene.addItem(hex_map[h]);
     }
 
-    for (unsigned int i = 0; i < 10; i++)
+    for (unsigned int i = 0; i < 100; i++)
     {
         //obstacles.push_back(new Obstacle());
         //scene.addItem(obstacles[i]);
@@ -56,8 +56,8 @@ void ControlWindow::on_startButton_clicked()
         int a = (rand() % 39) - 20;
         int b = (rand() % 39) - 20;
         cube h = {a,b,-a-b};
-        hex_map.AddHexItem(new Obstacle(h));
-        scene.addItem(hex_map[h]);
+        hex_map.AddHexItem(new Obstacle(h), &scene);
+        //scene.addItem(hex_map[h]);
     }
 
     view.setScene(&scene);
@@ -78,17 +78,6 @@ void ControlWindow::on_startButton_clicked()
 
 void ControlWindow::tick_update()
 {
-    /*
-    for(unsigned int i = 0; i < hexons.size(); i++)
-    {
-        hexons[i]->advance(1);
-    }
-    for(unsigned int i = 0; i < obstacles.size(); i++)
-    {
-        obstacles[i]->advance(1);
-    }
-    */
-
     hex_map.map_update();
     return;
 }

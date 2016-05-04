@@ -23,8 +23,10 @@ public:
     Map();
     ~Map();
     void map_update();
-    void AddHexItem(HexItem *A);
+    void AddHexItem(HexItem *A, QGraphicsScene *scene);
+    void MoveHexItem(cube h);
     void RemoveHexItem(HexItem *A);
+    void RemoveHexItem(cube h);
     HexItem * GetHexItem(cube h);
     HexItem * &operator [](const cube &h)
     {

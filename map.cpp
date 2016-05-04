@@ -1,6 +1,7 @@
 #include "map.h"
 #include <iostream>
 #include <fstream>
+#include <QGraphicsScene>
 
 Map::Map()
 {
@@ -26,6 +27,7 @@ Map::~Map()
 
 void Map::map_update()
 {
+    std::cout << grid.size() << "\t";
     std::vector <cube> move_list;
     std::vector <cube> erase_list;
     for (std::map <cube,HexItem*>::iterator it = grid.begin(); it != grid.end(); ++it)
@@ -49,6 +51,8 @@ void Map::map_update()
                 case 1:
                     // log for updating position
                     move_list.push_back(h);
+                    // remove obstacle
+                    erase_list.push_back(h+dh);
                     break;
                 case 2:
                     // log for erasure
@@ -56,39 +60,64 @@ void Map::map_update()
                     break;
                 }
             }
+            else
+            {
+                move_list.push_back(h);
+            }
         }
     }
     // erase hex items
     for (unsigned int i = 0; i < erase_list.size(); i++)
     {
-        grid.erase(erase_list[i]);
+        RemoveHexItem(erase_list[i]);
+        //grid.erase(erase_list[i]);
     }
     // move hex items that move
     for (unsigned int i = 0; i < move_list.size(); i++)
     {
-        AddHexItem(grid[move_list[i]]);
-        grid.erase(move_list[i]);
+        MoveHexItem(move_list[i]);
     }
     // draw hex items
     for (std::map <cube,HexItem*>::iterator it = grid.begin(); it != grid.end(); ++it)
     {
         it->second->advance(1);
     }
-
+    std::cout << move_list.size() << "\t";
+    std::cout << erase_list.size() << "\t";
+    std::cout << grid.size() << std::endl;
 }
 
-void Map::AddHexItem(HexItem *A)
+void Map::AddHexItem(HexItem *A, QGraphicsScene *scene)
 {
     cube h = A->get_pos();
     grid[h] = A;
+    scene->addItem(grid[h]);
+    return;
+}
 
+void Map::MoveHexItem(cube h)
+{
+    cube H = grid[h]->update_pos();
+    grid[H] = grid[h];
+    grid[h] = NULL;
+    grid.erase(h);
     return;
 }
 
 void Map::RemoveHexItem(HexItem *A)
 {
-
     cube h = A->get_pos();
+    RemoveHexItem(h);
+    return;
+}
+
+void Map::RemoveHexItem(cube h)
+{
+    if (!grid.count(h))
+    {
+        return;
+    }
+    delete grid[h];
     grid.erase(h);
     return;
 }

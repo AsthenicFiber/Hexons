@@ -14,6 +14,11 @@ HexItem::HexItem()
     vis = false;
 }
 
+HexItem::~HexItem()
+{
+    scene()->removeItem(this);
+}
+
 void HexItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     QPolygon poly;
@@ -54,6 +59,12 @@ cube HexItem::get_pos()
 bool HexItem::has_vis()
 {
     return vis;
+}
+
+cube HexItem::update_pos()
+{
+    hex = hex + dh;
+    return hex;
 }
 
 void HexItem::set_vis(Matrix vision)

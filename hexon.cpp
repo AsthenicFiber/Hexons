@@ -52,7 +52,7 @@ void Hexon::advance(int step)
     }
 
     // update position
-    hex = hex+dh;
+    //hex = hex+dh;
     pix p = cube2pix(hex);
 
     setPos(p.x,p.y);

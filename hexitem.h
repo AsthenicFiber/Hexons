@@ -32,6 +32,7 @@ class HexItem : public QGraphicsItem
 {
 public:
     HexItem();
+    ~HexItem();
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
 
@@ -42,6 +43,9 @@ public:
     //virtual cube get_pos() = 0;
     cube get_pos();
     bool has_vis();
+
+    cube update_pos();
+
     virtual void set_vis(Matrix vision);
     virtual void advance(int step) = 0;
 
