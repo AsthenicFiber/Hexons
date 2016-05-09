@@ -44,9 +44,9 @@ void Map::map_update()
         {
             if (grid.count(h+dh))
             {
-                int stat = grid[h]->interact(grid[h+dh]);
+                int status = grid[h]->interact(grid[h+dh]);
 
-                switch(stat)
+                switch(status)
                 {
                 case 1:
                     // log for updating position
@@ -203,7 +203,7 @@ Matrix Map::find_vis(cube h)
     ofs << h.x << "\t" << h.y << "\t" << h.z << std::endl;
 */
     //Matrix vision(2*(3*(visibility-1)*visibility+1),1);
-    Matrix vision(2*(int)pcvt.size(),1);
+    Matrix vision(2*(int)pcvt.size() + 6,1); // N * vision size (+ stats?)
     vision *= 0;
     //vis_tree(h, global_origin, vision, ofs);
     vis_tree(h, global_origin, vision);

@@ -18,9 +18,16 @@ struct cube
     int x;
     int y;
     int z;
-    //cube(int X, int Y) : x(X), y(Y), z(-X-Y)
-    //{
-    //}
+
+    cube() : x(0), y(0), z(0)
+    {
+    }
+    cube(int X, int Y) : x(X), y(Y), z(-X-Y)
+    {
+    }
+    cube(int X, int Y, int Z) : x(X), y(Y), z(Z)
+    {
+    }
 
     bool operator < (const cube &h) const
     {

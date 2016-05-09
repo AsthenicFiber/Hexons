@@ -9,6 +9,7 @@ Obstacle::Obstacle()
     setPos(p.x,p.y);
     color = rgb2color(0x703d0b);
     vis = false;
+    stats = Stats(0,15,0,0,(rand()%100)+101,0);
 }
 
 Obstacle::Obstacle(cube h)
@@ -18,6 +19,7 @@ Obstacle::Obstacle(cube h)
     setPos(p.x,p.y);
     color = rgb2color(0x703d0b);
     vis = false;
+    stats = Stats(0,15,0,0,(rand()%100)+101,0);
 }
 
 void Obstacle::advance(int step)

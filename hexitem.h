@@ -22,8 +22,25 @@ struct rgb
     int blue;
 };
 
+struct Stats
+{
+    int attack;
+    int defense;
+    int speed;
+    int energy;
+    int health;
+    int charisma;
+    Stats(int A, int D, int S, int E, int H, int C) : attack(A), defense(D), speed(S), energy(E), health(H), charisma(C)
+    {
+    }
+    Stats() : attack(0), defense(0), speed(0), energy(1), health(1), charisma(0)
+    {
+    }
+};
+
 
 QColor rgb2color(int rgbHex);
+QColor rgb2color(rgb cRGB);
 QColor hsv2color(hsv cHSV);
 hsv color2hsv(QColor C);
 rgb color2rgb(QColor C);
@@ -52,13 +69,15 @@ public:
     virtual cube tstep() = 0;
     virtual int interact(HexItem *hitem) = 0;
 
-    QColor color;
+    Stats stats;
+    char stance = 'n';
 
 protected:
     //QColor color;
     cube hex;
     bool vis;
     cube dh;
+    QColor color;
 private:
 
 };

@@ -4,6 +4,7 @@
 
 Hex::Hex(int q, int r)
 {
+    //H = cube(q,-q-r,r);
     H.x = q;
     H.y = -q-r;
     H.z = r;
@@ -16,6 +17,7 @@ Hex::Hex(cube h)
 
 Hex::Hex()
 {
+    //H = cube(0,0);
     H.x = 0;
     H.y = 0;
     H.z = 0;

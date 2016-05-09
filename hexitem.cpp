@@ -69,7 +69,13 @@ cube HexItem::update_pos()
 
 void HexItem::set_vis(Matrix vision)
 {
-    vision;
+    int N = vision.length();
+    vision[N-6][1] = stats.attack;
+    vision[N-5][1] = stats.defense;
+    vision[N-4][1] = stats.speed;
+    vision[N-3][1] = stats.energy;
+    vision[N-2][1] = stats.health;
+    vision[N-1][1] = stats.charisma;
     return;
 }
 
@@ -79,6 +85,11 @@ QColor rgb2color(int rgbHex)
     int green = (rgbHex >> 8) & 0xff;
     int blue = (rgbHex >> 0) & 0xff;
     return QColor(red, green, blue, 255);
+}
+
+QColor rgb2color(rgb C)
+{
+    return QColor().fromRgb(C.red, 255, C.green, C.blue);
 }
 
 QColor hsv2color(hsv C)
