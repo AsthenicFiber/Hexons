@@ -20,7 +20,8 @@ Hexon::Hexon(int a, int b)
     //setPos(mapToParent(x, y));
     setPos(p.x,p.y);
     color = rgb2color(0x0000ff);
-    brain.set_size(3*(6-1)*6+1 + 6,3+2,10); // make size universal
+    border = rgb2color(0x000000);
+    brain.set_size(6*(3*(6-1)*6+1) + 6,3+2+3,30); // make size universal
     vis = true;
     stats = Stats((rand()%10)+1,rand()%5,(rand()%10)+1,(rand()%20)+21,(rand()%50)+51,(rand()%10)+1);
 }
@@ -31,7 +32,8 @@ Hexon::Hexon(cube h)
     pix p = cube2pix(hex);
     setPos(p.x,p.y);
     color = rgb2color(0x0000ff);
-    brain.set_size(3*(4-1)*4+1,3+2,10);
+    border = rgb2color(0x000000);
+    brain.set_size(6*(3*(6-1)*6+1) + 6,3+2+3,30);
     vis = true;
     stats = Stats((rand()%10)+1,rand()%5,(rand()%10)+1,(rand()%20)+21,(rand()%50)+51,(rand()%10)+1);
 }
@@ -89,6 +91,12 @@ cube Hexon::tstep()
     C.green = 255-(int)(255*exp(-(stats.defense+stats.health)/50));
     C.blue = 255-(int)(255*exp(-(stats.energy+stats.charisma)/25));
     color = rgb2color(C);
+
+    C.red = 255*A[5][0];
+    C.green = 255*A[6][0];
+    C.blue = 255*A[7][0];
+    border = rgb2color(C);
+    //std::cout << C.red << "\t" << C.green << "\t" << C.blue << std::endl;
     //color = rgb2color(rgb{stats.attack+stats.speed, stats.defense+stats.health, stats.energy+stats.charisma});
 
     //pix p = cube2pix(hex);

@@ -205,8 +205,8 @@ Matrix Map::find_vis(cube h)
     ofs.open(fname, std::ofstream::out);
     ofs << h.x << "\t" << h.y << "\t" << h.z << std::endl;
 */
-    //Matrix vision(2*(3*(visibility-1)*visibility+1),1);
-    Matrix vision(2*(int)pcvt.size() + 6,1); // N * vision size (+ stats?)
+    //Matrix vision(6*(3*(visibility-1)*visibility+1),1);
+    Matrix vision(6*(int)pcvt.size() + 6,1); // N * vision size (+ stats?)
     vision *= 0;
     //vis_tree(h, global_origin, vision, ofs);
     vis_tree(h, global_origin, vision);
@@ -221,9 +221,15 @@ Matrix Map::vis_tree(cube h, cube H, Matrix vision)
     {
         if (grid.count(pcvt[H].branches[i] + h) == 1)
         {
-            hsv color = grid[pcvt[H].branches[i] + h]->get_color();
-            vision[pcvt[pcvt[H].branches[i]].in][1] = color.hue/359;
-            vision[pcvt[pcvt[H].branches[i]].in + 1][1] = color.val/255;
+            rgb color = grid[pcvt[H].branches[i] + h]->get_color();
+            vision[pcvt[pcvt[H].branches[i]].in][1] = mel(color.red)/255;
+            vision[pcvt[pcvt[H].branches[i]].in + 1][1] = mel(color.green)/255;
+            vision[pcvt[pcvt[H].branches[i]].in + 2][1] = mel(color.blue)/255;
+
+            color = grid[pcvt[H].branches[i] + h]->get_border();
+            vision[pcvt[pcvt[H].branches[i]].in + 3][1] = mel(color.red)/255;
+            vision[pcvt[pcvt[H].branches[i]].in + 4][1] = mel(color.green)/255;
+            vision[pcvt[pcvt[H].branches[i]].in + 5][1] = mel(color.blue)/255;
         }
         else
         {
@@ -239,10 +245,11 @@ Matrix Map::vis_tree(cube h, cube H, Matrix vision, std::ofstream& ofs)
     {
         if (grid.count(pcvt[H].branches[i] + h) == 1)
         {
-            hsv color = grid[pcvt[H].branches[i] + h]->get_color();
-            vision[pcvt[pcvt[H].branches[i]].in][1] = color.hue/359;
-            vision[pcvt[pcvt[H].branches[i]].in + 1][1] = color.val/255;
-            ofs << H.x  << "\t" << H.y << "\t" << H.z << "\t" << cube2pix(H).x << "\t" << cube2pix(H).y << "\t" << color.hue << "\t" << color.val << std::endl;
+            rgb color = grid[pcvt[H].branches[i] + h]->get_color();
+            vision[pcvt[pcvt[H].branches[i]].in][1] = color.red/359;
+            vision[pcvt[pcvt[H].branches[i]].in + 1][1] = color.green/255;
+            vision[pcvt[pcvt[H].branches[i]].in + 2][1] = color.blue/255;
+            ofs << H.x  << "\t" << H.y << "\t" << H.z << "\t" << cube2pix(H).x << "\t" << cube2pix(H).y << "\t" << color.red << "\t" << color.green << "\t" << color.blue << std::endl;
         }
         else
         {

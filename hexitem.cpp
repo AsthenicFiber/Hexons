@@ -10,6 +10,7 @@
 HexItem::HexItem()
 {
     color = QColor(Qt::blue);
+    border = QColor(Qt::white);
     hex = global_origin;
     vis = false;
 }
@@ -26,7 +27,8 @@ void HexItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget
     poly << QPoint(-10,-17) << QPoint(10,-17) << QPoint(20,0) << QPoint(10,17) << QPoint(-10,17) << QPoint(-20,0);
 
     //QPen pen(Qt::transparent, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
-    QPen pen(Qt::white, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
+    //QPen pen(Qt::white, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
+    QPen pen(border, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
     QBrush brush(Qt::SolidPattern);
 
     //color = hsv2color(get_color());
@@ -45,10 +47,15 @@ QRectF HexItem::boundingRect() const
     return QRectF(-20,-17,40,34);
 }
 
-hsv HexItem::get_color()
+rgb HexItem::get_color()
 {
-    return color2hsv(color);
+    return color2rgb(color);
     //return 0x703d0b;
+}
+
+rgb HexItem::get_border()
+{
+    return color2rgb(border);
 }
 
 cube HexItem::get_pos()

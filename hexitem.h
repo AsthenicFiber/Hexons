@@ -56,7 +56,8 @@ public:
     QRectF boundingRect() const Q_DECL_OVERRIDE;
     //void copy_hexon(Hexon A);
     //virtual hsv get_color() = 0;
-    hsv get_color();
+    rgb get_color();
+    rgb get_border();
     //virtual cube get_pos() = 0;
     cube get_pos();
     bool has_vis();
@@ -78,6 +79,7 @@ protected:
     bool vis;
     cube dh;
     QColor color;
+    QColor border;
 private:
 
 };

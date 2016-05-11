@@ -9,6 +9,7 @@ Obstacle::Obstacle()
     pix p = cube2pix(hex);
     setPos(p.x,p.y);
     color = rgb2color(0x703d0b);
+    border = rgb2color(0x703d0b);
     vis = false;
     stats = Stats(0,15,0,0,(rand()%100)+101,0);
 }
@@ -19,6 +20,7 @@ Obstacle::Obstacle(cube h)
     pix p = cube2pix(hex);
     setPos(p.x,p.y);
     color = rgb2color(0x703d0b);
+    border = rgb2color(0x703d0b);
     vis = false;
     stats = Stats(0,15,0,0,(rand()%100)+101,0);
 }
