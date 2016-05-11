@@ -30,15 +30,8 @@ void ControlWindow::on_startButton_clicked()
 
     scene.setItemIndexMethod(QGraphicsScene::NoIndex);
 
-    //hexons.push_back(new Hexon(0,0));
-    //hexons.push_back(new Hexon(2,1));
-    //hexons.push_back(new Hexon(-4,6));
-    //hexons.push_back(new Hexon(3,6));
-    //hexons.push_back(new Hexon(-4,-8));
-    //hexons.push_back(new Hexon(15,-9));
-
     //for (unsigned int i = 0; i < hexons.size(); i++)
-    for (unsigned int i = 0; i < 20; i++)
+    for (unsigned int i = 0; i < 30; i++)
     {
         //scene.addItem(hexons[i]);
         int a = (rand() % 39) - 20;
@@ -48,7 +41,7 @@ void ControlWindow::on_startButton_clicked()
         //scene.addItem(hex_map[h]);
     }
 
-    for (unsigned int i = 0; i < 100; i++)
+    for (unsigned int i = 0; i < 30; i++)
     {
         //obstacles.push_back(new Obstacle());
         //scene.addItem(obstacles[i]);

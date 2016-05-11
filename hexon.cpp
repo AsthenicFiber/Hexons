@@ -10,9 +10,10 @@
 Hexon::Hexon(int a, int b)
 {
 
-    hex.x = a;
-    hex.y = -a-b;
-    hex.z = b;
+    //hex.x = a;
+    //hex.y = -a-b;
+    //hex.z = b;
+    hex = cube(a,b);
 
     pix p = cube2pix(hex);
 
@@ -83,12 +84,12 @@ cube Hexon::tstep()
         stance = 'n';
     }
 
-    //rgb C;
-    //C.red = stats.attack+stats.speed;
-    //C.green = stats.defense+stats.health;
-    //C.blue = stats.energy+stats.charisma;
-    //color = rgb2color(C);
-    color = rgb2color(rgb{stats.attack+stats.speed, stats.defense+stats.health, stats.energy+stats.charisma});
+    rgb C;
+    C.red = 255-(int)(255*exp(-(stats.attack+stats.speed)/10));
+    C.green = 255-(int)(255*exp(-(stats.defense+stats.health)/50));
+    C.blue = 255-(int)(255*exp(-(stats.energy+stats.charisma)/25));
+    color = rgb2color(C);
+    //color = rgb2color(rgb{stats.attack+stats.speed, stats.defense+stats.health, stats.energy+stats.charisma});
 
     //pix p = cube2pix(hex);
 
@@ -108,7 +109,38 @@ int Hexon::interact(HexItem *hitem)
         else if (stance == 'a')
         {
             //attack sequence
-            return 1;
+
+            //initiative
+            if (hitem->stats.speed > stats.speed)
+            {
+                // other attacks first
+                combat(&hitem->stats,&stats);
+                if (stats.health <= 0)
+                {
+                    return 2;
+                }
+                combat(&stats,&hitem->stats);
+                if (hitem->stats.health <= 0)
+                {
+                    return 3;
+                }
+            }
+            else
+            {
+                // initiative won
+                combat(&stats,&hitem->stats);
+                if (hitem->stats.health <= 0)
+                {
+                    return 3;
+                }
+                combat(&hitem->stats,&stats);
+                if (stats.health <= 0)
+                {
+                    return 2;
+                }
+            }
+
+            return 0;
         }
         else if (stance == 'b')
         {
@@ -124,4 +156,32 @@ int Hexon::interact(HexItem *hitem)
     }
 
     return 0;
+}
+
+void combat(Stats *S1, Stats *S2)
+{
+    if (S1->energy <= 0)
+    {
+        return;
+    }
+    S1->energy--;
+
+    if (S1->attack <= S2->defense)
+    {
+        return;
+    }
+
+    //Roll to Hit
+    if ((rand() % (S1->speed + S2->speed)) < S1->speed)
+    {
+        S2->health -= S1->attack - S2->defense;
+        S1->attack++;
+        S2->defense++;
+    }
+    else
+    {
+        S1->speed++;
+        S2->speed++;
+    }
+    return;
 }

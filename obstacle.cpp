@@ -2,9 +2,10 @@
 
 Obstacle::Obstacle()
 {
-    hex.x = (rand() % 40) - 20;
-    hex.y = (rand() % 40) - 20;
-    hex.z = -hex.y - hex.x;
+    //hex.x = (rand() % 40) - 20;
+    //hex.y = (rand() % 40) - 20;
+    //hex.z = -hex.y - hex.x;
+    hex = cube((rand() % 40) - 20,(rand() % 40) - 20);
     pix p = cube2pix(hex);
     setPos(p.x,p.y);
     color = rgb2color(0x703d0b);

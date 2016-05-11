@@ -6,6 +6,8 @@
 #include "hexitem.h"
 #include "nnbase.h"
 
+void combat(Stats *S1, Stats *S2);
+
 class Hexon : public HexItem
 {
 public:

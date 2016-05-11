@@ -31,8 +31,8 @@ private:
     QGraphicsScene scene;
     QGraphicsView view;
 
-    std::vector <Hexon*> hexons;
-    std::vector <Obstacle*> obstacles;
+    //std::vector <Hexon*> hexons;
+    //std::vector <Obstacle*> obstacles;
     Map hex_map;
     //Hexon hexons[2];
 

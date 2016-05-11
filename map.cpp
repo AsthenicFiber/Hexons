@@ -58,6 +58,9 @@ void Map::map_update()
                     // log for erasure
                     erase_list.push_back(h);
                     break;
+                case 3:
+                    erase_list.push_back(h+dh);
+                    break;
                 }
             }
             else
