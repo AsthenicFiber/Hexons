@@ -1,7 +1,7 @@
 //#include <QGraphicsScene>
 //#include <QPainter>
 //#include <QStyleOption>
-//#include <iostream>
+#include <iostream>
 
 #include <cmath>
 
@@ -87,15 +87,19 @@ cube Hexon::tstep()
     }
 
     rgb C;
-    C.red = 255-(int)(255*exp(-(stats.attack+stats.speed)/10));
-    C.green = 255-(int)(255*exp(-(stats.defense+stats.health)/50));
-    C.blue = 255-(int)(255*exp(-(stats.energy+stats.charisma)/25));
+    C.red = 255-(int)(255*exp(-mel(stats.attack+stats.speed)/10));
+    C.green = 255-(int)(255*exp(-mel(stats.defense+stats.health)/50));
+    C.blue = 255-(int)(255*exp(-mel(stats.energy+stats.charisma)/25));
+    std::cout << C.red << "\t" << C.green << "\t" << C.blue << std::endl;
+
     color = rgb2color(C);
 
     C.red = 255*A[5][0];
     C.green = 255*A[6][0];
     C.blue = 255*A[7][0];
     border = rgb2color(C);
+
+    //C = color2rgb(color);
     //std::cout << C.red << "\t" << C.green << "\t" << C.blue << std::endl;
     //color = rgb2color(rgb{stats.attack+stats.speed, stats.defense+stats.health, stats.energy+stats.charisma});
 

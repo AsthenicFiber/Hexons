@@ -96,7 +96,7 @@ QColor rgb2color(int rgbHex)
 
 QColor rgb2color(rgb C)
 {
-    return QColor().fromRgb(C.red, 255, C.green, C.blue);
+    return QColor().fromRgb(C.red, C.green, C.blue, 255);
 }
 
 QColor hsv2color(hsv C)
