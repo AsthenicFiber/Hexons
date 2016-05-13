@@ -207,7 +207,11 @@ Matrix Map::find_vis(cube h)
 */
     //Matrix vision(6*(3*(visibility-1)*visibility+1),1);
     Matrix vision(6*(int)pcvt.size() + 6,1); // N * vision size (+ stats?)
-    vision *= 0;
+    //vision *= 0;
+    for (int i = 1; i < vision.length(); i++)
+    {
+        vision[i][0] = 0;
+    }
     //vis_tree(h, global_origin, vision, ofs);
     vis_tree(h, global_origin, vision);
 

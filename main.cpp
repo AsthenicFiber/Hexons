@@ -23,9 +23,6 @@ int main(int argc, char *argv[])
 
         std::cout << "Hello World!\n";
 
-        NNBase NN(10, 5, 20);
-        NN.feedforward().print_matrix();
-
         ControlWindow w;
         //w.showMaximized();
         w.show();

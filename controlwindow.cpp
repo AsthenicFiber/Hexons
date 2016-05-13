@@ -26,7 +26,7 @@ ControlWindow::~ControlWindow()
 void ControlWindow::on_startButton_clicked()
 {
     //QGraphicsScene scene;
-    scene.setSceneRect(-2000, -2000, 4000, 4000);
+    scene.setSceneRect(-3000, -3000, 6000, 6000);
 
     scene.setItemIndexMethod(QGraphicsScene::NoIndex);
 
@@ -63,7 +63,8 @@ void ControlWindow::on_startButton_clicked()
 
     view.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "Hexons"));
     view.resize(800, 800);
-    view.show();
+    //view.show();
+    view.showMaximized();
 
     connect(&timer, SIGNAL(timeout()), this, SLOT(tick_update()));
     timer.start(1000/2);

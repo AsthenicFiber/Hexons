@@ -1,7 +1,7 @@
 //#include <QGraphicsScene>
 //#include <QPainter>
 //#include <QStyleOption>
-#include <iostream>
+//#include <iostream>
 
 #include <cmath>
 
@@ -90,7 +90,7 @@ cube Hexon::tstep()
     C.red = 255-(int)(255*exp(-mel(stats.attack+stats.speed)/10));
     C.green = 255-(int)(255*exp(-mel(stats.defense+stats.health)/50));
     C.blue = 255-(int)(255*exp(-mel(stats.energy+stats.charisma)/25));
-    std::cout << C.red << "\t" << C.green << "\t" << C.blue << std::endl;
+    //std::cout << C.red << "\t" << C.green << "\t" << C.blue << std::endl;
 
     color = rgb2color(C);
 
@@ -116,6 +116,7 @@ int Hexon::interact(HexItem *hitem)
     {
         if (stance == 'n')
         {
+            dh = global_origin;
             return 0;
         }
         else if (stance == 'a')
@@ -157,6 +158,7 @@ int Hexon::interact(HexItem *hitem)
         else if (stance == 'b')
         {
             //breed sequence
+            dh = global_origin;
             return 0;
         }
     }
