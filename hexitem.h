@@ -62,6 +62,8 @@ public:
     cube get_pos();
     bool has_vis();
 
+    virtual char h_type() = 0;
+
     cube update_pos();
 
     virtual void set_vis(Matrix vision);

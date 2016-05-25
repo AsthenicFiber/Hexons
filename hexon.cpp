@@ -73,7 +73,7 @@ cube Hexon::tstep()
     //color = hsv2color({std::round(359*A[3][0]),std::round(255*A[4][0])});
 
     int st = (std::round(A[3][0]) * 2) + std::round(A[4][0]);
-    if (st == 0)
+    if (st == 2)
     {
         stance = 'a';
     }
@@ -108,6 +108,11 @@ cube Hexon::tstep()
     //setPos(p.x,p.y);
     //std::cout << "\n" << p.x << "\t" << p.y;
     return dh;
+}
+
+char Hexon::h_type()
+{
+    return 'h';
 }
 
 int Hexon::interact(HexItem *hitem)
@@ -159,6 +164,16 @@ int Hexon::interact(HexItem *hitem)
         {
             //breed sequence
             dh = global_origin;
+            /*
+            if (!(hitem->h_type() == 'h'))
+            {
+                return 0;
+            }
+            */
+            if (hitem->stance == 'b')
+            {
+                return 4;
+            }
             return 0;
         }
     }
@@ -199,3 +214,4 @@ void combat(Stats *S1, Stats *S2)
     }
     return;
 }
+

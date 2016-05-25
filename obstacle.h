@@ -14,6 +14,7 @@ public:
 
     cube tstep() override;
     int interact(HexItem *hitem) override;
+    char h_type() override;
 
 private:
     //cube hex;

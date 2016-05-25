@@ -49,5 +49,11 @@ cube Obstacle::tstep()
 
 int Obstacle::interact(HexItem *hitem)
 {
+    hitem;
     return 0;
+}
+
+char Obstacle::h_type()
+{
+    return 'o';
 }

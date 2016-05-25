@@ -41,7 +41,7 @@ void ControlWindow::on_startButton_clicked()
         //scene.addItem(hex_map[h]);
     }
 
-    for (unsigned int i = 0; i < 30; i++)
+    for (unsigned int i = 0; i < 50; i++)
     {
         //obstacles.push_back(new Obstacle());
         //scene.addItem(obstacles[i]);

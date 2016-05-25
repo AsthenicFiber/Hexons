@@ -61,6 +61,10 @@ void Map::map_update()
                 case 3:
                     erase_list.push_back(h+dh);
                     break;
+                case 4:
+                    // breed
+                    break;
+
                 }
             }
             else
