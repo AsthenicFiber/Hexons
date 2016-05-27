@@ -76,29 +76,29 @@ cube cube::operator + (const cube &h) const
     if (distance(H) > get_map_size())
     {
         int S = get_map_size();
-        if (distance(H,cube{2*S, -S, -S-1}) <= S)
+        if (distance(H,cube{2*S+1, -S, -S-1}) <= S)
         {
-            H = cube_subtract(H,cube{2*S, -S, -S-1});
+            H = cube_subtract(H,cube{2*S+1, -S, -S-1});
         }
-        else if (distance(H,cube{S+1, -2*S, S}) <= S)
+        else if (distance(H,cube{S+1, -2*S-1, S}) <= S)
         {
-            H = cube_subtract(H,cube{S+1, -2*S, S});
+            H = cube_subtract(H,cube{S+1, -2*S-1, S});
         }
-        else if (distance(H,cube{-S, -S-1, 2*S}) <= S)
+        else if (distance(H,cube{-S, -S-1, 2*S+1}) <= S)
         {
-            H = cube_subtract(H,cube{-S, -S-1, 2*S});
+            H = cube_subtract(H,cube{-S, -S-1, 2*S+1});
         }
-        else if (distance(H,cube{-2*S, S, S+1}) <= S)
+        else if (distance(H,cube{-2*S-1, S, S+1}) <= S)
         {
-            H = cube_subtract(H,cube{-2*S, S, S+1});
+            H = cube_subtract(H,cube{-2*S-1, S, S+1});
         }
-        else if (distance(H,cube{-S-1, 2*S, -S}) <= S)
+        else if (distance(H,cube{-S-1, 2*S+1, -S}) <= S)
         {
-            H = cube_subtract(H,cube{-S-1, 2*S, -S});
+            H = cube_subtract(H,cube{-S-1, 2*S+1, -S});
         }
-        else if (distance(H,cube{S, S+1, -2*S}) <= S)
+        else if (distance(H,cube{S, S+1, -2*S-1}) <= S)
         {
-            H = cube_subtract(H,cube{S, S+1, -2*S});
+            H = cube_subtract(H,cube{S, S+1, -2*S-1});
         }
     }
     return H;
@@ -231,30 +231,7 @@ int distance(cube A, cube B)
 
 int distance(cube A)
 {
-    //cube B = {0,0,0};
-    A.x = std::abs(A.x);
-    A.y = std::abs(A.y);
-    A.z = std::abs(A.z);
-
-    if (A.x > A.y)
-    {
-        if (A.x > A.z)
-        {
-            return A.x;
-        }
-        else
-        {
-            return A.z;
-        }
-    }
-    else if (A.y > A.z)
-    {
-        return A.y;
-    }
-    else
-    {
-        return A.z;
-    }
+    return (std::abs(A.x) + std::abs(A.y) + std::abs(A.z))/2;
 }
 
 int Hexant(cube A)

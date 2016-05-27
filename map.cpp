@@ -63,6 +63,16 @@ void Map::map_update()
                     break;
                 case 4:
                     // breed
+                    cube H1 = cube_rotate(h+dh,h,true);
+                    cube H2 = cube_rotate(h+dh,h,false);
+                    if (!grid.count(H1))
+                    {
+                        AddHexItem(breed_hexon(grid[h],grid[h+dh],H1), grid[h]->scene());
+                    }
+                    else if (!grid.count(H2))
+                    {
+                        AddHexItem(breed_hexon(grid[h],grid[h+dh],H2), grid[h]->scene());
+                    }
                     break;
 
                 }

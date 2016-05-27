@@ -9,9 +9,9 @@
 
 // Global Variable Access Functions
 int get_visibility();
-void set_visibility();
+void set_visibility(int val);
 int get_map_size();
-void set_map_size();
+void set_map_size(int val);
 
 struct pix
 {

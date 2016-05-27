@@ -24,4 +24,6 @@ private:
     NNBase brain;
 };
 
+Hexon * breed_hexon(HexItem *A, HexItem *B, cube h);
+
 #endif // HEXON_H

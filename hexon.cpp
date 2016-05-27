@@ -217,3 +217,8 @@ void combat(Stats *S1, Stats *S2)
     return;
 }
 
+
+Hexon * breed_hexon(HexItem *A, HexItem *B, cube h)
+{
+    return &Hexon(h);
+}
