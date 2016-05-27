@@ -48,6 +48,62 @@ pix Hex::loc()
     return cube2pix(H);
 }
 
+// Wraps Global Variables
+static int visibility = 6;
+static int map_size = 20;
+int get_visibility()
+{
+    return visibility;
+}
+void set_visibility(int val)
+{
+    visibility = val;
+    return;
+}
+int get_map_size()
+{
+    return map_size;
+}
+void set_map_size(int val)
+{
+    map_size = val;
+    return;
+}
+
+cube cube::operator + (const cube &h) const
+{
+    cube H = {x+h.x,y+h.y,z+h.z};
+    if (distance(H) > get_map_size())
+    {
+        int S = get_map_size();
+        if (distance(H,cube{2*S, -S, -S-1}) <= S)
+        {
+            H = cube_subtract(H,cube{2*S, -S, -S-1});
+        }
+        else if (distance(H,cube{S+1, -2*S, S}) <= S)
+        {
+            H = cube_subtract(H,cube{S+1, -2*S, S});
+        }
+        else if (distance(H,cube{-S, -S-1, 2*S}) <= S)
+        {
+            H = cube_subtract(H,cube{-S, -S-1, 2*S});
+        }
+        else if (distance(H,cube{-2*S, S, S+1}) <= S)
+        {
+            H = cube_subtract(H,cube{-2*S, S, S+1});
+        }
+        else if (distance(H,cube{-S-1, 2*S, -S}) <= S)
+        {
+            H = cube_subtract(H,cube{-S-1, 2*S, -S});
+        }
+        else if (distance(H,cube{S, S+1, -2*S}) <= S)
+        {
+            H = cube_subtract(H,cube{S, S+1, -2*S});
+        }
+    }
+    return H;
+}
+
 pix cube2pix(cube h)
 {
     pix a;
@@ -170,6 +226,12 @@ cube cube_add(cube A, cube B)
 int distance(cube A, cube B)
 {
     A = cube_subtract(A,B);
+    return distance(A);
+}
+
+int distance(cube A)
+{
+    //cube B = {0,0,0};
     A.x = std::abs(A.x);
     A.y = std::abs(A.y);
     A.z = std::abs(A.z);
@@ -193,12 +255,6 @@ int distance(cube A, cube B)
     {
         return A.z;
     }
-}
-
-int distance(cube A)
-{
-    //cube B = {0,0,0};
-    return distance(A, global_origin);
 }
 
 int Hexant(cube A)

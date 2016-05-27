@@ -21,7 +21,8 @@ Hexon::Hexon(int a, int b)
     setPos(p.x,p.y);
     color = rgb2color(0x0000ff);
     border = rgb2color(0x000000);
-    brain.set_size(6*(3*(6-1)*6+1) + 6,3+2+3,30); // make size universal
+    //extern int visibility;
+    brain.set_size(6*(3*(get_visibility()-1)*get_visibility()+1) + 6,3+2+3,30); // make size universal
     vis = true;
     stats = Stats((rand()%10)+1,rand()%5,(rand()%10)+1,(rand()%20)+21,(rand()%50)+51,(rand()%10)+1);
 }
@@ -33,7 +34,8 @@ Hexon::Hexon(cube h)
     setPos(p.x,p.y);
     color = rgb2color(0x0000ff);
     border = rgb2color(0x000000);
-    brain.set_size(6*(3*(6-1)*6+1) + 6,3+2+3,30);
+    //extern int visibility;
+    brain.set_size(6*(3*(get_visibility()-1)*get_visibility()+1) + 6,3+2+3,30);
     vis = true;
     stats = Stats((rand()%10)+1,rand()%5,(rand()%10)+1,(rand()%20)+21,(rand()%50)+51,(rand()%10)+1);
 }

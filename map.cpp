@@ -8,7 +8,7 @@ Map::Map()
     //HexMap.push_back(new Hexon(3,-4));
     //xi.push_back(index{0,0});
 
-    visibility = 6;
+    //visibility = 6;
     generate_pcvt();
     print_pcvt();
 
@@ -136,6 +136,7 @@ HexItem * Map::GetHexItem(cube h)
 
 void Map::generate_pcvt()
 {
+    //extern int visibility;
     // A = 3*(r-1)*r+1 = 3*r^2 - 3*r + 1
     cube h = global_origin;
     int ind = 0;
@@ -147,7 +148,7 @@ void Map::generate_pcvt()
     node.in = ind++;
     pcvt[h] = node;
 
-    for (int i=1; i<visibility; i++)
+    for (int i=1; i<get_visibility(); i++)
     {
         h = cube_add(h,cube{1,-1,0});
         for (int j=0; j<6*i; j++)
@@ -173,7 +174,7 @@ void Map::generate_pcvt()
             h = cube_rotate(h, global_origin, true);
         }
     }
-    std::cout << "\n" << pcvt.size() << "\t" << ind << "\n";
+    std::cout << "\n" << pcvt.size() << "\t" << ind << "\t" << (get_visibility()-1)*get_visibility()*3+1 << "\n";
     return;
 }
 
@@ -209,6 +210,7 @@ Matrix Map::find_vis(cube h)
     ofs.open(fname, std::ofstream::out);
     ofs << h.x << "\t" << h.y << "\t" << h.z << std::endl;
 */
+    //extern int visibility;
     //Matrix vision(6*(3*(visibility-1)*visibility+1),1);
     Matrix vision(6*(int)pcvt.size() + 6,1); // N * vision size (+ stats?)
     //vision *= 0;

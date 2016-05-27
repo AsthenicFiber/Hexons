@@ -26,28 +26,30 @@ ControlWindow::~ControlWindow()
 void ControlWindow::on_startButton_clicked()
 {
     //QGraphicsScene scene;
-    scene.setSceneRect(-3000, -3000, 6000, 6000);
+    int size = get_map_size();
+    //scene.setSceneRect(-3000, -3000, 6000, 6000);
+    scene.setSceneRect(-50*size, -50*size, 100*size, 100*size);
 
     scene.setItemIndexMethod(QGraphicsScene::NoIndex);
 
     //for (unsigned int i = 0; i < hexons.size(); i++)
-    for (unsigned int i = 0; i < 30; i++)
+    for (unsigned int i = 0; i < 5; i++)
     {
         //scene.addItem(hexons[i]);
-        int a = (rand() % 39) - 20;
-        int b = (rand() % 39) - 20;
+        int a = (rand() % (2*size-1)) - size;
+        int b = (rand() % (2*size-1)) - size;
         cube h = {a,b,-a-b};
         hex_map.AddHexItem(new Hexon(h), &scene);
         //scene.addItem(hex_map[h]);
     }
 
-    for (unsigned int i = 0; i < 50; i++)
+    for (unsigned int i = 0; i < 5; i++)
     {
         //obstacles.push_back(new Obstacle());
         //scene.addItem(obstacles[i]);
 
-        int a = (rand() % 39) - 20;
-        int b = (rand() % 39) - 20;
+        int a = (rand() % (2*size-1)) - size;
+        int b = (rand() % (2*size-1)) - size;
         cube h = {a,b,-a-b};
         hex_map.AddHexItem(new Obstacle(h), &scene);
         //scene.addItem(hex_map[h]);

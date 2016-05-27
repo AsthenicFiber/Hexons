@@ -7,6 +7,12 @@
 
 //#include <vector>
 
+// Global Variable Access Functions
+int get_visibility();
+void set_visibility();
+int get_map_size();
+void set_map_size();
+
 struct pix
 {
     int x;
@@ -33,10 +39,8 @@ struct cube
     {
         return (x < h.x) || (x == h.x && y < h.y);
     }
-    cube operator + (const cube &h) const
-    {
-        return cube{x+h.x,y+h.y,z+h.z};
-    }
+    cube operator + (const cube &h) const;
+
     bool operator == (const cube &h) const
     {
         return (x == h.x && y == h.y);
