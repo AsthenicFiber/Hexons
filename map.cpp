@@ -30,6 +30,9 @@ void Map::map_update()
     std::cout << grid.size() << "\t";
     std::vector <cube> move_list;
     std::vector <cube> erase_list;
+    std::vector <HexItem*> child_list;
+    //QGraphicsScene* grid_scene = grid[grid.begin()->first]->scene;
+    QGraphicsScene * grid_scene = grid.begin()->second->scene();
     for (std::map <cube,HexItem*>::iterator it = grid.begin(); it != grid.end(); ++it)
     {
         const cube h = it->first;
@@ -67,12 +70,13 @@ void Map::map_update()
                     cube H2 = cube_rotate(h+dh,h,false);
                     if (!grid.count(H1))
                     {
-                        AddHexItem(breed_hexon(grid[h],grid[h+dh],H1), grid[h]->scene());
+                        child_list.push_back(breed_hexon(grid[h],grid[h+dh],H1));
                     }
                     else if (!grid.count(H2))
                     {
-                        AddHexItem(breed_hexon(grid[h],grid[h+dh],H2), grid[h]->scene());
+                        child_list.push_back(breed_hexon(grid[h],grid[h+dh],H2));
                     }
+
                     break;
 
                 }
@@ -89,6 +93,11 @@ void Map::map_update()
         RemoveHexItem(erase_list[i]);
         //grid.erase(erase_list[i]);
     }
+    // create child hex items
+    for (unsigned int i = 0; i < child_list.size(); i++)
+    {
+        AddHexItem(child_list[i], grid_scene);
+    }
     // move hex items that move
     for (unsigned int i = 0; i < move_list.size(); i++)
     {
@@ -101,6 +110,7 @@ void Map::map_update()
     }
     std::cout << move_list.size() << "\t";
     std::cout << erase_list.size() << "\t";
+    std::cout << child_list.size() << "\t";
     std::cout << grid.size() << std::endl;
 }
 

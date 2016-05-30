@@ -221,5 +221,5 @@ Hexon * breed_hexon(HexItem *A, HexItem *B, cube h)
 {
     A;
     B;
-    return &Hexon(h);
+    return new Hexon(h);
 }

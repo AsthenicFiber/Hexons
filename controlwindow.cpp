@@ -26,7 +26,7 @@ ControlWindow::~ControlWindow()
 void ControlWindow::on_startButton_clicked()
 {
     //QGraphicsScene scene;
-    set_map_size(10);
+    set_map_size(20);
     set_visibility(4);
     int size = get_map_size();
     //scene.setSceneRect(-3000, -3000, 6000, 6000);
@@ -35,7 +35,7 @@ void ControlWindow::on_startButton_clicked()
     scene.setItemIndexMethod(QGraphicsScene::NoIndex);
 
     //for (unsigned int i = 0; i < hexons.size(); i++)
-    for (unsigned int i = 0; i < 20; i++)
+    for (unsigned int i = 0; i < 200; i++)
     {
         //scene.addItem(hexons[i]);
         int a = (rand() % (2*size+1)) - size;
@@ -50,7 +50,7 @@ void ControlWindow::on_startButton_clicked()
         //scene.addItem(hex_map[h]);
     }
 
-    for (unsigned int i = 0; i < 20; i++)
+    for (unsigned int i = 0; i < 1; i++)
     {
         //obstacles.push_back(new Obstacle());
         //scene.addItem(obstacles[i]);

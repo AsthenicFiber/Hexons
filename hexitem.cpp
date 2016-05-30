@@ -37,8 +37,20 @@ void HexItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget
 
     painter->setPen(pen);
     painter->setBrush(brush);
-
     painter->drawPolygon(poly);
+
+    if (stance == 'a')
+    {
+        brush.setColor(Qt::red);
+        painter->setBrush(brush);
+        painter->drawEllipse(QPoint(0,0),5,5);
+    }
+    else if (stance == 'b')
+    {
+        brush.setColor(Qt::blue);
+        painter->setBrush(brush);
+        painter->drawEllipse(QPoint(0,0),5,5);
+    }
     //painter->end();
 }
 
