@@ -31,15 +31,11 @@ private:
     QGraphicsScene scene;
     QGraphicsView view;
 
-    //std::vector <Hexon*> hexons;
-    //std::vector <Obstacle*> obstacles;
     Map hex_map;
-    //Hexon hexons[2];
 
 signals:
 
 protected:
-    //void timerEvent(QTimerEvent *event);
 
 private slots:
     void on_startButton_clicked();

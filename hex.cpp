@@ -49,17 +49,7 @@ pix Hex::loc()
 }
 
 // Wraps Global Variables
-static int visibility = 6;
 static int map_size = 20;
-int get_visibility()
-{
-    return visibility;
-}
-void set_visibility(int val)
-{
-    visibility = val;
-    return;
-}
 int get_map_size()
 {
     return map_size;

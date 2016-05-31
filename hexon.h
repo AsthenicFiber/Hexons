@@ -6,6 +6,11 @@
 #include "hexitem.h"
 #include "nnbase.h"
 
+
+// Global Variable Access Functions
+int get_visibility();
+void set_visibility(int val);
+
 void combat(Stats *S1, Stats *S2);
 
 class Hexon : public HexItem

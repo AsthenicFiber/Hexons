@@ -7,6 +7,19 @@
 
 #include "hexon.h"
 
+
+// Wraps Global Variables
+static int visibility = 6;
+int get_visibility()
+{
+    return visibility;
+}
+void set_visibility(int val)
+{
+    visibility = val;
+    return;
+}
+
 Hexon::Hexon(int a, int b)
 {
 

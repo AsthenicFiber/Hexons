@@ -16,6 +16,7 @@
 
 int main(int argc, char *argv[])
 {
+    // Wrapped code in try/catch to handle exceptions
     try
     {
         QApplication a(argc, argv);
@@ -23,6 +24,7 @@ int main(int argc, char *argv[])
 
         std::cout << "Hello World!\n";
 
+        //Creates ControlWindow QMainWindow Object and starts it
         ControlWindow w;
         //w.showMaximized();
         w.show();
