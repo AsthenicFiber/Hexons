@@ -1,4 +1,7 @@
 #include <cmath>
+#ifdef __APPLE__
+#include <stdlib.h>
+#endif
 
 #include "hex.h"
 
