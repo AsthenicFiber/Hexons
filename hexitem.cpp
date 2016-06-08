@@ -75,6 +75,12 @@ cube HexItem::get_pos()
     return hex;
 }
 
+void HexItem::set_pos(cube h)
+{
+    hex = h;
+    return;
+}
+
 bool HexItem::has_vis()
 {
     return vis;

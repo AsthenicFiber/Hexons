@@ -41,6 +41,7 @@ void ControlWindow::on_startButton_clicked()
 
     scene.setItemIndexMethod(QGraphicsScene::NoIndex);
 
+    srand(0);
     // Generate random Hexons
     for (unsigned int i = 0; i < 200; i++) // #from control window value
     {
@@ -76,7 +77,7 @@ void ControlWindow::on_startButton_clicked()
     view.setBackgroundBrush(Qt::black);
 
     view.setCacheMode(QGraphicsView::CacheBackground);
-    view.setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+    view.setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate); // FullViewportUpdate
     view.setDragMode(QGraphicsView::ScrollHandDrag);
 
     view.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "Hexons"));

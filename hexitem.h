@@ -60,6 +60,7 @@ public:
     rgb get_border();
     //virtual cube get_pos() = 0;
     cube get_pos();
+    void set_pos(cube h);
     bool has_vis();
 
     virtual char h_type() = 0;

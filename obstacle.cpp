@@ -1,17 +1,8 @@
 #include "obstacle.h"
 
 Obstacle::Obstacle()
+  : Obstacle(cube((rand() % 40) - 20,(rand() % 40) - 20))
 {
-    //hex.x = (rand() % 40) - 20;
-    //hex.y = (rand() % 40) - 20;
-    //hex.z = -hex.y - hex.x;
-    hex = cube((rand() % 40) - 20,(rand() % 40) - 20);
-    pix p = cube2pix(hex);
-    setPos(p.x,p.y);
-    color = rgb2color(0x703d0b);
-    border = rgb2color(0x703d0b);
-    vis = false;
-    stats = Stats(0,15,0,0,(rand()%100)+101,0);
 }
 
 Obstacle::Obstacle(cube h)

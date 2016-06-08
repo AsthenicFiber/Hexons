@@ -138,6 +138,11 @@ void Map::AddHexItem(HexItem *A, QGraphicsScene *scene)
 void Map::MoveHexItem(cube h)
 {
     cube H = grid[h]->update_pos();
+    if ( grid.count(H) )
+    {
+        grid[h]->set_pos(h);
+        return;
+    }
     grid[H] = grid[h];
     grid[h] = NULL;
     grid.erase(h);
