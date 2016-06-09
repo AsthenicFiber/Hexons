@@ -20,7 +20,7 @@ public:
     Hexon(cube h);
     void copy_hexon(const Hexon &A);
     void set_vis(Matrix vision) override;
-    void advance(int step) Q_DECL_OVERRIDE;
+    //void advance(int step) Q_DECL_OVERRIDE;
     cube tstep() override;
     int interact(HexItem *hitem) override;
     char h_type() override;

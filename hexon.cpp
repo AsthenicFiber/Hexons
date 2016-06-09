@@ -30,9 +30,8 @@ Hexon::Hexon(cube h)
     hex = h;
     pix p = cube2pix(hex);
     setPos(p.x,p.y);
-    color = rgb2color(0xff0000);
+    color = rgb2color(0xff00ff);
     border = rgb2color(0x000000);
-    //extern int visibility;
     brain.set_size(6*(3*(get_visibility()-1)*get_visibility()+1) + 6,3+2+3,30);
     vis = true;
     stats = Stats((rand()%10)+1,rand()%5,(rand()%10)+1,(rand()%20)+21,(rand()%50)+51,(rand()%10)+1);
@@ -48,7 +47,7 @@ void Hexon::set_vis(Matrix vision)
 {
     brain.set_inputs(vision);
 }
-
+/*
 void Hexon::advance(int step)
 {
     if (!step)
@@ -63,7 +62,7 @@ void Hexon::advance(int step)
     setPos(p.x,p.y);
     //std::cout << "\n" << p.x << "\t" << p.y;
     return;
-}
+}*/
 
 cube Hexon::tstep()
 {

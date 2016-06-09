@@ -15,7 +15,7 @@ Obstacle::Obstacle(cube h)
     vis = false;
     stats = Stats(0,15,0,0,(rand()%100)+101,0);
 }
-
+/*
 void Obstacle::advance(int step)
 {
     if (!step)
@@ -28,7 +28,7 @@ void Obstacle::advance(int step)
     pix p = cube2pix(hex);
     setPos(p.x,p.y);
     return;
-}
+}*/
 
 cube Obstacle::tstep()
 {

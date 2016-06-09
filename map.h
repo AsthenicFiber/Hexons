@@ -23,7 +23,7 @@ public:
     Map();
     ~Map();
     void map_update();
-    void AddHexItem(HexItem *A, QGraphicsScene *scene);
+    bool AddHexItem(HexItem *A, QGraphicsScene *scene);
     void MoveHexItem(cube h);
     void RemoveHexItem(HexItem *A);
     void RemoveHexItem(cube h);

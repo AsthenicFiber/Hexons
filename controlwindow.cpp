@@ -45,30 +45,38 @@ void ControlWindow::on_startButton_clicked()
     // Generate random Hexons
     for (unsigned int i = 0; i < 200; i++) // #from control window value
     {
-        // generate random position in hexagon #make new function?
-        int a = (rand() % (2*size+1)) - size;
-        int b = (rand() % (2*size-std::abs(a)+1)) - size;
-        if (a < 0)
+        bool s = false;
+        while (!s)
         {
-            b = b - a;
+            // generate random position in hexagon #make new function?
+            int a = (rand() % (2*size+1)) - size;
+            int b = (rand() % (2*size-std::abs(a)+1)) - size;
+            if (a < 0)
+            {
+                b = b - a;
+            }
+            cube h = {a,b,-a-b};
+            // add hexon to map
+            s = hex_map.AddHexItem(new Hexon(h), &scene);
         }
-        cube h = {a,b,-a-b};
-        // add hexon to map
-        hex_map.AddHexItem(new Hexon(h), &scene);
     }
 
     for (unsigned int i = 0; i < 1; i++) // #from control window value
     {
-        // generate random position in hexagon #make new function?
-        int a = (rand() % (2*size+1)) - size;
-        int b = (rand() % (2*size-std::abs(a)+1)) - size;
-        if (a < 0)
+        bool s = false;
+        while (!s)
         {
-            b = b - a;
+            // generate random position in hexagon #make new function?
+            int a = (rand() % (2*size+1)) - size;
+            int b = (rand() % (2*size-std::abs(a)+1)) - size;
+            if (a < 0)
+            {
+                b = b - a;
+            }
+            cube h = {a,b,-a-b};
+            // add obstacle to map
+            s = hex_map.AddHexItem(new Obstacle(h), &scene);
         }
-        cube h = {a,b,-a-b};
-        // add obstacle to map
-        hex_map.AddHexItem(new Obstacle(h), &scene);
     }
 
     // attach scene to view, and adjust settings

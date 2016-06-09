@@ -126,23 +126,29 @@ void Map::map_update()
 }
 
 // Add hex item to the map and to the scene
-void Map::AddHexItem(HexItem *A, QGraphicsScene *scene)
+bool Map::AddHexItem(HexItem *A, QGraphicsScene *scene)
 {
     cube h = A->get_pos();
+    if (grid.count(h))
+    {
+        return false;
+    }
     grid[h] = A;
     scene->addItem(grid[h]);
-    return;
+    return true;
 }
 
 // move the hex item to a different key in the map
 void Map::MoveHexItem(cube h)
 {
-    cube H = grid[h]->update_pos();
-    if ( grid.count(H) )
+    cube H = h + grid[h]->get_move();
+    //cube H = grid[h]->update_pos();
+    if (grid.count(H))
     {
-        grid[h]->set_pos(h);
+        //grid[h]->set_pos(h);
         return;
     }
+    H = grid[h]->update_pos();
     grid[H] = grid[h];
     grid[h] = NULL;
     grid.erase(h);

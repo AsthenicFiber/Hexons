@@ -60,6 +60,7 @@ public:
     rgb get_border();
     //virtual cube get_pos() = 0;
     cube get_pos();
+    cube get_move();
     void set_pos(cube h);
     bool has_vis();
 
@@ -68,7 +69,7 @@ public:
     cube update_pos();
 
     virtual void set_vis(Matrix vision);
-    virtual void advance(int step) = 0;
+    void advance(int step);
 
     virtual cube tstep() = 0;
     virtual int interact(HexItem *hitem) = 0;

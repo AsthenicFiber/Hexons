@@ -75,6 +75,11 @@ cube HexItem::get_pos()
     return hex;
 }
 
+cube HexItem::get_move()
+{
+    return dh;
+}
+
 void HexItem::set_pos(cube h)
 {
     hex = h;
@@ -84,6 +89,17 @@ void HexItem::set_pos(cube h)
 bool HexItem::has_vis()
 {
     return vis;
+}
+
+void HexItem::advance(int step)
+{
+    if (!step)
+    {
+        return;
+    }
+    pix p = cube2pix(hex);
+    setPos(p.x,p.y);
+    return;
 }
 
 cube HexItem::update_pos()
