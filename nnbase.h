@@ -12,6 +12,7 @@ public:
     void set_inputs(Matrix input);
     Matrix feedforward();
     NNBase breed(NNBase B, int mode, int mutation);
+    void copy_nn(NNBase B);
 
 private:
     void init_weights();

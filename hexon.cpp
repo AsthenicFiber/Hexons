@@ -37,6 +37,12 @@ Hexon::Hexon(cube h)
     stats = Stats((rand()%10)+1,rand()%5,(rand()%10)+1,(rand()%20)+21,(rand()%50)+51,(rand()%10)+1);
 }
 
+Hexon::Hexon(cube h, NNBase NN)
+  : Hexon(h)
+{
+    brain.copy_nn(NN);
+}
+
 void Hexon::copy_hexon(const Hexon &A)
 {
     hex = A.hex;
@@ -216,7 +222,6 @@ void combat(Stats *S1, Stats *S2)
 
 Hexon * breed_hexon(HexItem *A, HexItem *B, cube h)
 {
-    A;
-    B;
-    return new Hexon(h);
+    return new Hexon(h,A->brain.breed(B->brain,1,10)); // mode = 1: random weighted average, 10% random chance of mutation
+    //return new Hexon(h);
 }

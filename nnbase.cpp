@@ -135,6 +135,13 @@ NNBase NNBase::breed(NNBase B, int mode, int mutation)
     return C;
 }
 
+void NNBase::copy_nn(NNBase B)
+{
+    w1 = B.w1;
+    w2 = B.w2;
+    return;
+}
+
 void NNBase::init_weights()
 {
     unsigned seed1 = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();

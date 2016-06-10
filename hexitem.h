@@ -5,6 +5,7 @@
 #include <QGraphicsItem>
 #include "hex.h"
 #include "matrix.h"
+#include "nnbase.h"
 
 struct hsv
 {
@@ -76,6 +77,7 @@ public:
 
     Stats stats;
     char stance = 'n';
+    NNBase brain;
 
 protected:
     //QColor color;
@@ -84,6 +86,7 @@ protected:
     cube dh;
     QColor color;
     QColor border;
+
 private:
 
 };
