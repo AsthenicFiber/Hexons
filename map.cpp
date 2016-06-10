@@ -79,11 +79,17 @@ void Map::map_update()
                     cube H2 = cube_rotate(h+dh,h,false);
                     if (!grid.count(H1))
                     {
-                        child_list.push_back(breed_hexon(grid[h],grid[h+dh],H1));
+                        if (breed_hexon_check(&grid[h]->stats,&grid[h+dh]->stats))
+                        {
+                            child_list.push_back(breed_hexon(grid[h],grid[h+dh],H1));
+                        }
                     }
                     else if (!grid.count(H2))
                     {
-                        child_list.push_back(breed_hexon(grid[h],grid[h+dh],H2));
+                        if (breed_hexon_check(&grid[h]->stats,&grid[h+dh]->stats))
+                        {
+                            child_list.push_back(breed_hexon(grid[h],grid[h+dh],H2));
+                        }
                     }
 
                     break;

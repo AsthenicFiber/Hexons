@@ -32,7 +32,7 @@ Hexon::Hexon(cube h)
     setPos(p.x,p.y);
     color = rgb2color(0xff00ff);
     border = rgb2color(0x000000);
-    brain.set_size(6*(3*(get_visibility()-1)*get_visibility()+1) + 6,3+2+3,30);
+    brain.set_size(6*(3*(get_visibility()-1)*get_visibility()+1) + 6,3+2+3,80);
     vis = true;
     stats = Stats((rand()%10)+1,rand()%5,(rand()%10)+1,(rand()%20)+21,(rand()%50)+51,(rand()%10)+1);
 }
@@ -218,6 +218,28 @@ void combat(Stats *S1, Stats *S2)
         S2->speed++;
     }
     return;
+}
+
+
+bool breed_hexon_check(Stats *S1, Stats *S2)
+{
+    if (S1->energy < 5 || S2->energy < 5)
+    {
+        return false;
+    }
+
+    S1->charisma++;
+    S2->charisma++;
+
+    if ((rand() % S2->charisma) >= S1->charisma)
+    {
+        return false;
+    }
+
+    S1->energy = S1->energy - 5;
+    S2->energy = S2->energy - 5;
+
+    return true;
 }
 
 Hexon * breed_hexon(HexItem *A, HexItem *B, cube h)

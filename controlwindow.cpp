@@ -32,8 +32,8 @@ ControlWindow::~ControlWindow()
 void ControlWindow::on_startButton_clicked()
 {
     // Set Global variables - #from control window values
-    set_map_size(20); // radius of map
-    set_visibility(4); // visibility range of Hexons
+    set_map_size(40); // radius of map
+    set_visibility(2); // visibility range of Hexons
     int size = get_map_size();
 
     // Scaled size of scene
@@ -43,7 +43,7 @@ void ControlWindow::on_startButton_clicked()
 
     srand(0);
     // Generate random Hexons
-    for (unsigned int i = 0; i < 200; i++) // #from control window value
+    for (unsigned int i = 0; i < 100; i++) // #from control window value
     {
         bool s = false;
         while (!s)
@@ -61,7 +61,7 @@ void ControlWindow::on_startButton_clicked()
         }
     }
 
-    for (unsigned int i = 0; i < 1; i++) // #from control window value
+    for (unsigned int i = 0; i < 200; i++) // #from control window value
     {
         bool s = false;
         while (!s)

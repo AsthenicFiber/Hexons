@@ -27,6 +27,7 @@ public:
 private:
 };
 
+bool breed_hexon_check(Stats *S1, Stats *S2);
 Hexon * breed_hexon(HexItem *A, HexItem *B, cube h);
 
 #endif // HEXON_H
