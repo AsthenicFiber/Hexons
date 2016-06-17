@@ -4,6 +4,11 @@
 #include <QCoreApplication>
 #include <iostream>
 
+#define MapSize 1
+#define VisionRange 2
+#define NHexonInit 3
+#define NObstacleInit 4
+
 // Constructor for ControlWindow
 // Generates interactive elements, and attaches signals
 ControlWindow::ControlWindow(QWidget *parent) :
@@ -12,11 +17,16 @@ ControlWindow::ControlWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    startButton = new QPushButton("Start",this);
+    QPushButton * startButton = new QPushButton("Start",this);
     startButton->setGeometry(QRect(QPoint(100,100),QSize(50,25)));
 
     connect(startButton, SIGNAL(clicked()), this, SLOT(on_startButton_clicked()));
     //connect(&timer, SIGNAL(timeout()), &scene, SLOT(tick_update()));
+
+    inputs[MapSize] = new InputWidget(this,100,150,10,999,20,"Map Radius");
+    inputs[VisionRange] = new InputWidget(this,100,200,0,9,2,"Vision Range");
+    inputs[NHexonInit] = new InputWidget(this,200,150,0,999,50,"Starting Hexons");
+    inputs[NObstacleInit] = new InputWidget(this,200,200,0,999,100,"Starting Obstacles");
 }
 
 // Destructor
@@ -32,8 +42,8 @@ ControlWindow::~ControlWindow()
 void ControlWindow::on_startButton_clicked()
 {
     // Set Global variables - #from control window values
-    set_map_size(40); // radius of map
-    set_visibility(2); // visibility range of Hexons
+    set_map_size(inputs[MapSize]->value()); // radius of map
+    set_visibility(inputs[VisionRange]->value()); // visibility range of Hexons
     int size = get_map_size();
 
     // Scaled size of scene
@@ -43,7 +53,7 @@ void ControlWindow::on_startButton_clicked()
 
     srand(0);
     // Generate random Hexons
-    for (unsigned int i = 0; i < 100; i++) // #from control window value
+    for (int i = 0; i < inputs[NHexonInit]->value(); i++) // #from control window value
     {
         bool s = false;
         while (!s)
@@ -61,7 +71,7 @@ void ControlWindow::on_startButton_clicked()
         }
     }
 
-    for (unsigned int i = 0; i < 200; i++) // #from control window value
+    for (int i = 0; i < inputs[NObstacleInit]->value(); i++) // #from control window value
     {
         bool s = false;
         while (!s)
