@@ -106,9 +106,9 @@ void ControlWindow::on_startButton_clicked()
     view.showMaximized();
 
     // play music
-    QSound music("song_of_storms5.wav");
-    //music.play("song_of_storms5.wav");
-    music.play("lost_woods.wav");
+    QSound music("../Hexons/song_of_storms5.wav");
+    //music.play("../Hexons/song_of_storms5.wav");
+    music.play("../Hexons/lost_woods.wav");
 
     // connect timer to update function
     connect(&timer, SIGNAL(timeout()), this, SLOT(tick_update()));
