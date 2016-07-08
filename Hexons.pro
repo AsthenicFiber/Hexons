@@ -1,6 +1,7 @@
 #QT += core
 #QT -= gui
 QT += widgets
+QT += multimedia
 
 CONFIG += c++11
 
@@ -32,3 +33,7 @@ HEADERS += \
 
 FORMS += \
     controlwindow.ui
+
+DISTFILES += \
+    lost_woods.wav \
+    song_of_storms5.wav

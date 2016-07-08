@@ -2,6 +2,7 @@
 #include "ui_controlwindow.h"
 
 #include <QCoreApplication>
+#include <QSound>
 #include <iostream>
 
 #define MapSize 1
@@ -103,6 +104,11 @@ void ControlWindow::on_startButton_clicked()
 
     // display view (new window)
     view.showMaximized();
+
+    // play music
+    QSound music("song_of_storms5.wav");
+    //music.play("song_of_storms5.wav");
+    music.play("lost_woods.wav");
 
     // connect timer to update function
     connect(&timer, SIGNAL(timeout()), this, SLOT(tick_update()));
