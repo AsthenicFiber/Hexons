@@ -3,6 +3,7 @@
 
 #include "hexon.h"
 #include "obstacle.h"
+#include "food.h"
 #include "matrix.h"
 #include <map>
 #include <vector>

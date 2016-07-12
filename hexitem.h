@@ -31,10 +31,11 @@ struct Stats
     int energy;
     int health;
     int charisma;
-    Stats(int A, int D, int S, int E, int H, int C) : attack(A), defense(D), speed(S), energy(E), health(H), charisma(C)
+    int food;
+    Stats(int A, int D, int S, int E, int H, int C, int F) : attack(A), defense(D), speed(S), energy(E), health(H), charisma(C), food(F)
     {
     }
-    Stats() : attack(0), defense(0), speed(0), energy(1), health(1), charisma(0)
+    Stats() : attack(0), defense(0), speed(0), energy(1), health(1), charisma(0), food(0)
     {
     }
 };

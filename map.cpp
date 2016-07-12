@@ -93,7 +93,15 @@ void Map::map_update()
                     }
 
                     break;
-
+                }
+            }
+            else if(grid[h]->h_type() == 'f')
+            {
+                // grow and add to child list to add to map
+                int E = grow_food_check(&grid[h]->stats);
+                if (E > 0)
+                {
+                    child_list.push_back(grow_food(h+dh,E));
                 }
             }
             else

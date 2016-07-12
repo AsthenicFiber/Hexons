@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     hexitem.cpp \
     obstacle.cpp \
     matrix.cpp \
-    nnbase.cpp
+    nnbase.cpp \
+    food.cpp
 
 HEADERS += \
     controlwindow.h \
@@ -29,7 +30,8 @@ HEADERS += \
     hexitem.h \
     obstacle.h \
     matrix.h \
-    nnbase.h
+    nnbase.h \
+    food.h
 
 FORMS += \
     controlwindow.ui

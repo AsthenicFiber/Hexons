@@ -13,7 +13,7 @@ Obstacle::Obstacle(cube h)
     color = rgb2color(0x703d0b);
     border = rgb2color(0x703d0b);
     vis = false;
-    stats = Stats(0,15,0,0,(rand()%100)+101,0);
+    stats = Stats(0,15,0,0,(rand()%100)+101,0,0);
 }
 /*
 void Obstacle::advance(int step)

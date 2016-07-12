@@ -34,7 +34,7 @@ Hexon::Hexon(cube h)
     border = rgb2color(0x000000);
     brain.set_size(6*(3*(get_visibility()-1)*get_visibility()+1) + 6,3+2+3,80);
     vis = true;
-    stats = Stats((rand()%10)+1,rand()%5,(rand()%10)+1,(rand()%20)+21,(rand()%50)+51,(rand()%10)+1);
+    stats = Stats((rand()%10)+1,rand()%5,(rand()%10)+1,(rand()%20)+21,(rand()%50)+51,(rand()%10)+1,0);
 }
 
 Hexon::Hexon(cube h, NNBase NN)
@@ -122,71 +122,67 @@ char Hexon::h_type()
 
 int Hexon::interact(HexItem *hitem)
 {
-    if (hitem->has_vis())
+    if (hitem->h_type() == 'f')
     {
-        if (stance == 'n')
-        {
-            dh = global_origin;
-            return 0;
-        }
-        else if (stance == 'a')
-        {
-            //attack sequence
-
-            //initiative
-            if (hitem->stats.speed > stats.speed)
-            {
-                // other attacks first
-                combat(&hitem->stats,&stats);
-                if (stats.health <= 0)
-                {
-                    return 2;
-                }
-                combat(&stats,&hitem->stats);
-                if (hitem->stats.health <= 0)
-                {
-                    return 3;
-                }
-            }
-            else
-            {
-                // initiative won
-                combat(&stats,&hitem->stats);
-                if (hitem->stats.health <= 0)
-                {
-                    return 3;
-                }
-                combat(&hitem->stats,&stats);
-                if (stats.health <= 0)
-                {
-                    return 2;
-                }
-            }
-
-            return 0;
-        }
-        else if (stance == 'b')
-        {
-            //breed sequence
-            dh = global_origin;
-            /*
-            if (!(hitem->h_type() == 'h'))
-            {
-                return 0;
-            }
-            */
-            if (hitem->stance == 'b')
-            {
-                return 4;
-            }
-            return 0;
-        }
+        stats.energy += hitem->stats.food;
+        return 3;
     }
-    else
+    if (stance == 'n')
     {
         dh = global_origin;
         return 0;
-        // don't move
+    }
+    else if (stance == 'a')
+    {
+        //attack sequence
+
+        //initiative
+        if (hitem->stats.speed > stats.speed)
+        {
+            // other attacks first
+            combat(&hitem->stats,&stats);
+            if (stats.health <= 0)
+            {
+                return 2;
+            }
+            combat(&stats,&hitem->stats);
+            if (hitem->stats.health <= 0)
+            {
+                return 3;
+            }
+        }
+        else
+        {
+            // initiative won
+            combat(&stats,&hitem->stats);
+            if (hitem->stats.health <= 0)
+            {
+                return 3;
+            }
+            combat(&hitem->stats,&stats);
+            if (stats.health <= 0)
+            {
+                return 2;
+            }
+        }
+
+        return 0;
+    }
+    else if (stance == 'b')
+    {
+        //breed sequence
+        dh = global_origin;
+        /*
+        if (!(hitem->h_type() == 'h'))
+        {
+            return 0;
+        }
+        */
+        if (hitem->stance == 'b')
+        {
+            return 4;
+        }
+        return 0;
     }
 
     return 0;
@@ -223,7 +219,7 @@ void combat(Stats *S1, Stats *S2)
 
 bool breed_hexon_check(Stats *S1, Stats *S2)
 {
-    if (S1->energy < 5 || S2->energy < 5)
+    if (S1->energy < 10 || S2->energy < 10)
     {
         return false;
     }
@@ -236,8 +232,8 @@ bool breed_hexon_check(Stats *S1, Stats *S2)
         return false;
     }
 
-    S1->energy = S1->energy - 5;
-    S2->energy = S2->energy - 5;
+    S1->energy = S1->energy - 10;
+    S2->energy = S2->energy - 10;
 
     return true;
 }
