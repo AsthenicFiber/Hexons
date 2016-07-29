@@ -155,6 +155,10 @@ bool Map::AddHexItem(HexItem *A, QGraphicsScene *scene)
 // move the hex item to a different key in the map
 void Map::MoveHexItem(cube h)
 {
+    if (!grid.count(h))
+    {
+        return;
+    }
     cube H = h + grid[h]->get_move();
     //cube H = grid[h]->update_pos();
     if (grid.count(H))

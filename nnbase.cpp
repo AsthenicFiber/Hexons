@@ -1,23 +1,13 @@
 #include "nnbase.h"
-#include <random>
 #include <chrono>
 
 //typedef std::chrono::high_resolution_clock myclock;
 
-int seed_1 = 0;
+std::default_random_engine NNBase::generator(0); // std::chrono::system_clock::now().time_since_epoch().count())
 
 NNBase::NNBase()
-{
-    inputs = 1;
-    outputs = 1;
-    nodes = 1;
-    w1 = Matrix(nodes,inputs);
-    w2 = Matrix(outputs,nodes);
-    inp = Matrix(inputs,1);
-    outp = Matrix(outputs,1);
-    n1 = Matrix(nodes,1);
-    init_weights();
-}
+    : NNBase(1,1,1)
+{ }
 
 NNBase::NNBase(int n_in, int n_out, int n_n)
 {
@@ -76,8 +66,6 @@ NNBase NNBase::breed(NNBase B, int mode, int mutation)
     else if (mode == 1)
     {
         // random weighted average
-        unsigned seed1 = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
-        std::default_random_engine generator (seed1 + seed_1++);
         std::uniform_real_distribution<mel> distribution(0,1.0);
         mel x = distribution(generator);
 
@@ -119,8 +107,6 @@ NNBase NNBase::breed(NNBase B, int mode, int mutation)
 
     if (!(rand() % mutation))
     {
-        unsigned seed1 = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
-        std::default_random_engine generator (seed1 + seed_1++);
         std::uniform_real_distribution<mel> distribution(-1.0,1.0);
 
         if (rand() % 2)
@@ -144,12 +130,10 @@ void NNBase::copy_nn(NNBase B)
 
 void NNBase::init_weights()
 {
-    unsigned seed1 = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
     //myclock::time_point begin_clock = myclock::now();
     //myclock::duration d = myclock::now() - begin_clock;
     //unsigned int seed1 = d.count();
     //unsigned seed1 = 102264135;
-    std::default_random_engine generator (seed1 + seed_1++);
     std::uniform_real_distribution<mel> distribution(-1.0,1.0);
 
     for (int i = 0; i < w1.rows(); i++)
